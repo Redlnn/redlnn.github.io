@@ -1,4 +1,4 @@
 # redlnn.github.io
-A website Powered by Bootstrap
+A personal website powered by Bootstrap 4.0.0
 
 This is Red_lnn's Home Page.
