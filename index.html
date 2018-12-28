@@ -11,10 +11,220 @@
     <title>Home Page</title>
     <!-- Bootstrap -->
     <link href="css/bootstrap-4.0.0.css" rel="stylesheet">
-	<link rel="icon" href="./favicon.png" type="image/x-icon">
+	<link rel="icon" href="./favicon.png" mce_href="./favicon.png" type="image/x-icon">
+	<link rel="shortcut icon" href="./favicon.png" mce_href="./favicon.png" type="image/x-icon">
+	<link rel="icon" href="./favicon.png" type="image/gif" >
   </head>
+  <style>
+/*注释为默认设置*/
+/*
+搜索栏字体样式 
+宽度︰ 90%;
+高度︰ 40px;
+背景颜色︰ 透明;
+边境︰ 无;
+大纲︰ 0;
+字体大小︰ 18px;
+字体颜色: #000000;
+填充︰ 0 20px;
+边界半径︰ 50px
+*/
+
+#search_input {
+	width: 100%;
+	height: 40px;
+	background-color: transparent;
+	border: none;
+	outline: 0;
+	font-size: 0.95rem;
+	padding: 0 10px;
+	border-radius: 50px
+}
+
+/*
+搜索框边距 
+下边距︰ 30px;
+上边距︰ 20px;
+*/
+
+.search_part {
+	margin-bottom: 5px;
+	margin-top: 15px;
+}
+
+/*
+跨度样式
+显示︰ 阻止;
+溢出︰ 隐藏;
+左填充︰ 5px;
+垂直对齐︰ 居中;
+*/
+
+.search_bar span {
+	display: block;
+	font-size: 12px;
+	overflow: hidden;
+	padding-left: 2px;
+	margin-right: 42px;
+	vertical-align: middle;
+}
+.search_bar span i {
+	display:none;
+	float: right;
+	width: 35px;
+	height: 40px;
+}
+.search_bar .si {
+	margin: 0 38px 0 10px;
+}
+
+/*
+搜索栏框架样式 {
+框阴影︰ 0 0 18px rgba(70,70,40,.255);括号里的颜色为Rgb默认，可进入http://rgb.phpddt.com/查询
+-webkit 动画︰ fadeIn 2.5;
+动画︰ fadeIn 2.5;
+背景色︰ rgba(255,255,255,.100);
+边界半径︰ 50px;
+显示︰ 表;
+垂直对齐︰ 居中;
+宽度︰ 80%;根据你喜欢的宽度调整，目前我为了对齐图标使用80%
+高度︰ 40px;
+最大宽度︰ 400px;
+边距︰ 10px 默认布局;
+}
+*/
+
+.search_bar {
+	box-shadow: 0 0 5px rgba(0,0,0,.255);
+	-webkit-animation: fadeInDown 2s;
+	animation: fadeInDown 2s;
+	background-color: rgba(255,255,255,.8);
+	border-radius: 50px;
+	display: table;
+	vertical-align: middle;
+	width: 85%;
+	height: 20px;
+	max-width: 100%;
+	margin: 10px auto;
+	position: relative;
+	z-index: 10;
+}
+
+/*
+搜索栏搜索目标确认图标样式，目前为米奇
+轮廓边框︰ 0;
+高度︰ 40px;
+浮标位置︰ 右;
+颜色: #000;
+字体大小︰ 16px;
+垂直对齐︰ 居中;
+字体粗细︰ 700;
+边境︰ 无;
+背景颜色︰ 透明;
+填充︰ 0 13px 0 13px
+*/
+#search_submit {
+	outline: 0;
+	height: 100%;
+	float: right;
+	color: #4a4266;
+	font-size: 1rem;
+	font-weight: 500;
+	border: none;
+	background-color: transparent;
+	padding: 0 13px 0 13px
+}
+
+
+/*搜索建议条*/
+#suggest {
+	position: absolute;
+	left: -1px;
+	right: -1px;
+	top: 40px;
+	border:1px solid rgba(0,0,0,.1);
+	line-height: 40px;
+	background: rgba(255,255,255,0.9);
+	box-shadow: 0 0 5px rgba(0,0,0,.1);
+	border-radius: 15px;
+	padding-top: 20px;
+}
+#suggest p {
+	text-align: left;
+	margin-left: -10px;
+	margin-right: 30px;
+	margin-bottom: -5px;
+	margin-top: -5px;
+}
+#suggest p:hover {
+	background: rgba(200,200,200,.5);
+
+}
+#suggest a {
+	text-decoration: none;
+	color: black;
+}
+#suggest .close {
+	text-align: right;
+	font-size: 0.9rem;
+	color: #888;
+	padding-right: 40px;
+	margin-top: -5px;
+	margin-bottom: 10px;
+}
+
+@-webkit-keyframes fadeIn {
+	0% {
+		opacity: 0
+	}
+
+	100% {
+		opacity: 1
+	}
+}
+
+@keyframes fadeIn {
+	0% {
+		opacity: 0
+	}
+
+	100% {
+		opacity: 1
+	}
+}
+
+@-webkit-keyframes fadeInDown {
+	0% {
+		opacity: 0;
+		-webkit-transform: translateY(-20px);
+		transform: translateY(-20px)
+	}
+
+	100% {
+		opacity: 1;
+		-webkit-transform: translateY(0);
+		transform: translateY(0)
+	}
+}
+
+@keyframes fadeInDown {
+	0% {
+		opacity: 0;
+		-webkit-transform: translateY(-20px);
+		-ms-transform: translateY(-20px);
+		transform: translateY(-20px)
+	}
+
+	100% {
+		opacity: 1;
+		-webkit-transform: translateY(0);
+		-ms-transform: translateY(0);
+		transform: translateY(0)
+	}
+}
+  </style>
   <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="animation: fadeIn 2s;">
       <a class="navbar-brand"><strong>Red_lnn</strong></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -28,25 +238,37 @@
       </div>
     </nav>
     <header>
-      <div class="jumbotron">
+      <div class="jumbotron" style="animation: fadeIn 0.5s;">
         <div class="container" align="center">
           <div id="search" class="g-ib" style="width:80%">
-      		<img hidefocus="true" src="./images/bd_logo.png" width="40%">
-        	<form id="search-form" action="https://www.baidu.com/s" target="_self">
+      		<img hidefocus="true" src="./images/Google.gif" width="40%" style="animation: fadeIn 3.5s;">
+        	<!--<form id="search-form" action="https://www.baidu.com/s" target="_self">
           	<p class="input-wrapper wrapper-hook">
               <input name="wd" type="text" class="form-control" id="search-inputbox" placeholder="搜你想搜的 (๑•̀ㅂ•́)و✧" autocomplete="off">
           	</p>
           	<p class="button-wrapper">
               <input class="btn btn-outline-success my-2 my-sm-0" id="search-bth" type="submit" style="font-size: 1rem" value="百度一下">
           	</p>
-        	</form>
+        	</form>-->
+			<form id="search-form" class="search_bar" action="https://www.baidu.com/s" target="_self">
+			  <input type="submit" id="search_submit" value="☯">
+			<span>
+			  <div class="si">
+				<input name="wd" class="search" type="text" autocomplete="off" id="search_input" placeholder="✎... 偷得浮生半日闲～">
+			  </div>
+		    </span>
+			  <div id="suggest" style="display:none">
+				<ul id="oUl"></ul>
+				<div class="close" onclick="close_sug()">| 收起</div>
+			  </div>
+			</form>
       	  </div>
         </div>
       </div>
     </header>
     <section>
       <div class="container">
-        <div class="row">
+        <div class="row" style="animation: fadeIn 2.5s;">
           <div class="col-lg-4 col-md-6 col-sm-12 text-center"> <a href="https://www.bilibili.com">
 		    <img class="rounded-circle" alt="1340x110" style="width: 110px; height: 110px;" src="./images/bilibili.png" data-holder-rendered="true">
 			<p> </p>
@@ -86,8 +308,8 @@
         </div>
       </div>
     </section>
+    <footer class="text-center" style="animation: fadeIn 2.5s;">
 	<hr>
-    <footer class="text-center">
       <div class="container">
         <div class="row">
           <div class="col-12">
@@ -97,9 +319,72 @@
       </div>
     </footer>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
-    <script src="/js/jquery-3.2.1.min.js"></script> 
+    <script src="./js/jquery-3.2.1.min.js"></script> 
     <!-- Include all compiled plugins (below), or include individual files as needed --> 
-    <script src="/js/popper.min.js"></script> 
-    <script src="/js/bootstrap-4.0.0.js"></script>
+    <script src="./js/popper.min.js"></script> 
+    <script src="./js/bootstrap-4.0.0.js"></script>
+	<script>
+			//搜索联想
+			search_input.onkeyup = function () {
+            var value = this.value;	
+            if (value) {
+                var oScript = document.createElement('script');
+                oScript.src = 'https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=' + value + '&cb=aa'
+                document.body.appendChild(oScript);
+                oScript.remove();//会发现，随着你输入的东西越多，你创建的script标签就越多，我们在获取到它后直接移除即可。
+            } else if(value == 0){
+                suggest.style.display = 'none';
+            }
+			}
+			function aa(data) {
+            suggest.style.display = 'block';
+			suggest.style.animation = 'fadeIn .3s';
+            var list = data.s;
+            var str = '';
+            if (list.length > 0) {
+				suggest.style.display = 'block';
+				suggest.style.animation = 'fadeIn .3s';
+                list.forEach(function (ele, index) {
+                    str += '<a href ="https://www.baidu.com/s?wd=' + ele +  '"><p>&nbsp;&nbsp;' + ele + '</p></a>';
+                })
+                oUl.innerHTML = str;
+            }else { 
+				suggest.style.display = 'none';
+            }
+			}
+			
+			//单击收起按钮隐藏搜索联想
+			function close_sug() {
+				last_kw = '';
+				document.getElementById('suggest').style.display = 'none';
+			}
+			
+			//鼠标单击空白处隐藏搜索联想
+			var $ = function(i) {
+				return document.getElementById(i)
+			};
+			function moreshow() {
+				var e = $('suggest');
+				if (e.style.display != 'block') {
+					e.style.display = 'block';
+					e.style.animation = 'fadeIn .3s'
+				} else {
+					e.style.display = 'none';
+				}
+				return false
+			};
+			function moreddhide(e) {
+				if (!e) var e = window.event;
+				if (e.srcElement) {
+					var a = e.srcElement.getAttribute("id")
+				} else {
+					var a = e.target.getAttribute("id")
+				}
+				if (a != "suggest_Show") {
+					$('suggest').style.display = 'none'
+				}
+			};
+			document.onclick = moreddhide;
+	</script>
   </body>
 </html>
