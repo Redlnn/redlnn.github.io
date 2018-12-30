@@ -4,158 +4,172 @@ overflow:-moz-scrollbars-none;
 }
 html::-webkit-scrollbar{width:0px}
 
-	/*注释为默认设置*/
-	/*
-	搜索栏字体样式 
-	宽度︰ 90%;
-	高度︰ 40px;
-	背景颜色︰ 透明;
-	边境︰ 无;
-	大纲︰ 0;
-	字体大小︰ 18px;
-	字体颜色: #000000;
-	填充︰ 0 20px;
-	边界半径︰ 50px
-	*/
-	#search_input {
-		width: 100%;
-		height: 40px;
-		background-color: transparent;
-		border: none;
-		outline: 0;
-		font-size: 0.95rem;
-		padding: 0 10px;
-		border-radius: 50px
-	}
-	/*
-	搜索框边距 
-	下边距︰ 30px;
-	上边距︰ 20px;
-	*/
-	.search_part {
-		margin-bottom: 5px;
-		margin-top: 15px;
-	}
-	/*
-	跨度样式
-	显示︰ 阻止;
-	溢出︰ 隐藏;
-	左填充︰ 5px;
-	垂直对齐︰ 居中;
-	*/
-	.search_bar span {
-		display: block;
-		font-size: 12px;
-		overflow: hidden;
-		padding-left: 2px;
-		margin-right: 42px;
-		vertical-align: middle;
-	}
-	.search_bar span i {
-		display:none;
-		float: right;
-		width: 35px;
-		height: 40px;
-	}
-	.search_bar .si {
-		margin: 0 38px 0 10px;
-	}
-	/*
-	搜索栏框架样式 {
-	框阴影︰ 0 0 18px rgba(70,70,40,.255);括号里的颜色为Rgb默认，可进入http://rgb.phpddt.com/查询
-	-webkit 动画︰ fadeIn 2.5;
-	动画︰ fadeIn 2.5;
-	背景色︰ rgba(255,255,255,.100);
-	边界半径︰ 50px;
-	显示︰ 表;
-	垂直对齐︰ 居中;
-	宽度︰ 80%;根据你喜欢的宽度调整，目前我为了对齐图标使用80%
-	高度︰ 40px;
-	最大宽度︰ 400px;
-	边距︰ 10px 默认布局;
-	}
-	*/
-	.search_bar {
-		box-shadow: 0 0 5px rgba(0,0,0,.255);
-		/*-webkit-animation: fadeInDown 1.5s;*/
-		animation: fadeInDown 1.5s;
-		background-color: rgba(255,255,255,.8);
-		border-radius: 50px;
-		display: table;
-		vertical-align: middle;
-		width: 85%;
-		height: 20px;
-		max-width: 100%;
-		margin: 10px auto;
-		position: relative;
-		z-index: 10;
-	}
-	/*
-	搜索栏搜索目标确认图标样式，目前为米奇
-	轮廓边框︰ 0;
-	高度︰ 40px;
-	浮标位置︰ 右;
-	颜色: #000;
-	字体大小︰ 16px;
-	垂直对齐︰ 居中;
-	字体粗细︰ 700;
-	边境︰ 无;
-	背景颜色︰ 透明;
-	填充︰ 0 13px 0 13px
-	*/
-	#search_submit {
-		outline: 0;
-		height: 100%;
-		float: right;
-		color: #4a4266;
-		font-size: 1rem;
-		font-weight: 500;
-		border: none;
-		background-color: transparent;
-		padding: 0 13px 0 13px
-	}
-	/*搜索联想*/
-	#suggest {
-		position: absolute;
-		left: 0px;
-		right: 0px;
-		top: 40px;
-		border:1px solid rgba(0,0,0,.1);
-		line-height: 40px;
-		background: rgba(255,255,255,0.9);
-		box-shadow: 0 0 5px rgba(0,0,0,.1);
-		border-radius: 15px;
-		padding-top: 20px;
-		padding-left: 0px;
-		padding-right: 0px;
-	}
-	#suggest p {
-		text-align: left;
-		margin-left: -20px;
-		margin-right: 20px;
-		margin-bottom: -5px;
-		margin-top: -5px;
-		border-radius: 12px;
-	}
-	#suggest p:hover {
-		background: rgba(200,200,200,.5);
-	}
-	#suggest a {
-		text-decoration: none;
-		color: black;
-	}
-	#suggest .close {
-		text-align: right;
-		font-size: 0.9rem;
-		color: #888;
-		padding-right: 40px;
-		margin-top: -5px;
-		margin-bottom: 10px;
-	}
-	#mark a {
-		text-decoration: none;
-		color: black;
-	}
+/*注释为默认设置*/
+/*
+搜索栏字体样式 
+宽度︰ 90%;
+高度︰ 40px;
+背景颜色︰ 透明;
+边境︰ 无;
+大纲︰ 0;
+字体大小︰ 18px;
+字体颜色: #000000;
+填充︰ 0 20px;
+边界半径︰ 50px
+*/
+#search_input {
+	width: 100%;
+	height: 40px;
+	background-color: transparent;
+	border: none;
+	outline: 0;
+	font-size: 0.95rem;
+	padding: 0 10px;
+	border-radius: 50px
+}
+/*
+搜索框边距 
+下边距︰ 30px;
+上边距︰ 20px;
+*/
+.search_part {
+	margin-bottom: 5px;
+	margin-top: 15px;
+}
+/*
+跨度样式
+显示︰ 阻止;
+溢出︰ 隐藏;
+左填充︰ 5px;
+垂直对齐︰ 居中;
+*/
+.search_bar span {
+	display: block;
+	font-size: 12px;
+	overflow: hidden;
+	padding-left: 2px;
+	margin-right: 42px;
+	vertical-align: middle;
+}
+.search_bar span i {
+	display:none;
+	float: right;
+	width: 35px;
+	height: 40px;
+}
+.search_bar .si {
+	margin: 0 38px 0 10px;
+}
+/*
+搜索栏框架样式 {
+框阴影︰ 0 0 18px rgba(70,70,40,.255);括号里的颜色为Rgb默认，可进入http://rgb.phpddt.com/查询
+-webkit 动画︰ fadeIn 2.5;
+动画︰ fadeIn 2.5;
+背景色︰ rgba(255,255,255,.100);
+边界半径︰ 50px;
+显示︰ 表;
+垂直对齐︰ 居中;
+宽度︰ 80%;根据你喜欢的宽度调整，目前我为了对齐图标使用80%
+高度︰ 40px;
+最大宽度︰ 400px;
+边距︰ 10px 默认布局;
+}
+*/
+.search_bar {
+	box-shadow: 0 0 5px rgba(0,0,0,.255);
+	/*-webkit-animation: fadeInDown 1.5s;*/
+	animation: fadeInDown 1.5s;
+	background-color: rgba(255,255,255,.8);
+	border-radius: 50px;
+	display: table;
+	vertical-align: middle;
+	width: 85%;
+	height: 20px;
+	max-width: 100%;
+	margin: 10px auto;
+	position: relative;
+	z-index: 10;
+}
+/*
+搜索栏搜索目标确认图标样式，目前为米奇
+轮廓边框︰ 0;
+高度︰ 40px;
+浮标位置︰ 右;
+颜色: #000;
+字体大小︰ 16px;
+垂直对齐︰ 居中;
+字体粗细︰ 700;
+边境︰ 无;
+背景颜色︰ 透明;
+填充︰ 0 13px 0 13px
+*/
+#search_submit {
+	outline: 0;
+	height: 100%;
+	float: right;
+	color: #4a4266;
+	font-size: 1rem;
+	font-weight: 500;
+	border: none;
+	background-color: transparent;
+	padding: 0 13px 0 13px
+}
+/*搜索联想*/
+#suggest {
+	position: absolute;
+	left: 0px;
+	right: 0px;
+	top: 40px;
+	border:1px solid rgba(0,0,0,.1);
+	line-height: 40px;
+	background: rgba(255,255,255,0.9);
+	box-shadow: 0 0 5px rgba(0,0,0,.1);
+	border-radius: 15px;
+	padding-top: 20px;
+	padding-left: 0px;
+	padding-right: 0px;
+}
+#suggest p {
+	text-align: left;
+	margin-left: -20px;
+	margin-right: 20px;
+	margin-bottom: -5px;
+	margin-top: -5px;
+	border-radius: 12px;
+}
+#suggest p:hover {
+	background: rgba(200,200,200,.5);
+}
+#suggest a {
+	text-decoration: none;
+	color: black;
+}
+#suggest .close {
+	text-align: right;
+	font-size: 0.9rem;
+	color: #888;
+	padding-right: 40px;
+	margin-top: -5px;
+	margin-bottom: 10px;
+}
+
+/*书签链接无下划线、颜色*/
+#mark a {
+	text-decoration: none;
+	color: black;
+}
+
+/*禁止选择*/
+.noselect {
+	moz-user-select: -moz-none;
+	-moz-user-select: none;
+	-o-user-select:none;
+	-khtml-user-select:none;
+	-webkit-user-select:none;
+	-ms-user-select:none;
+	user-select:none;
+}
+	
 	@-webkit-keyframes fadeIn {
 		0% {
 			opacity: 0

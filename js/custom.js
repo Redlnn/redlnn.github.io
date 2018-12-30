@@ -76,7 +76,14 @@ jQuery(document).ready(function($) {
 			"position": "absolute",
 			"font-weight": "bold",
 			"color": "#FF6347",
-			"text-shadow": "0 0 2px #FF6347"
+			"text-shadow": "0 0 2px #FF6347",
+			"moz-user-select": "-moz-none",
+			"-moz-user-select": "none",
+			"-o-user-select": "none",
+			"-khtml-user-select": "none",
+			"-webkit-user-select": "none",
+			"-ms-user-select": "none",
+			"user-select": "none"
 		});
 		$("body").append($i);
 		$i.animate({
