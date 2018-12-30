@@ -31,7 +31,7 @@
   --breakpoint-md: 768px;
   --breakpoint-lg: 992px;
   --breakpoint-xl: 1200px;
-  --font-family-sans-serif: "PingFang SC", "PingFang TC", "Source Han Sans SC", "Source Han Sans TC", "Noto Sans S Chinese", "Microsoft Yahei", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "PingFang SC", "PingFang TC", "Source Han Sans SC", "Source Han Sans TC", "Noto Sans S Chinese", "Microsoft Yahei", sans-serif, Robot, Arial, verdana, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   --font-family-monospace: "Source Code Pro", "Source Code Variable", SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
@@ -42,7 +42,7 @@
 }
 
 html {
-  font-family: "PingFang SC", "PingFang TC", "Source Han Sans SC", "Source Han Sans TC", "Noto Sans S Chinese", "Microsoft Yahei", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "PingFang TC", "Source Han Sans SC", "Source Han Sans TC", "Noto Sans S Chinese", "Microsoft Yahei", sans-serif, Robot, Arial, verdana, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   line-height: 1.15;
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
@@ -525,7 +525,7 @@ code,
 kbd,
 pre,
 samp {
-  font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace,"Source Code Pro", "Source Code Variable", "Courier New";
 }
 
 code {
@@ -5698,7 +5698,7 @@ button.close {
   z-index: 1060;
   display: block;
   max-width: 276px;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "PingFang TC", "Source Han Sans SC", "Source Han Sans TC", "Noto Sans S Chinese", "Microsoft Yahei", sans-serif, Robot, Arial, verdana, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   font-style: normal;
   font-weight: 400;
   line-height: 1.5;
