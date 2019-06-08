@@ -1,8 +1,25 @@
+/*:root {
+  --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "PingFang SC", "PingFang TC", "Source Han Sans SC", "Source Han Sans TC", "Noto Sans S Chinese", "Microsoft Yahei", sans-serif, Robot, Arial, verdana, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  --font-family-monospace: "Source Code Pro", "Source Code Variable", SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}*/
+
 html {
--ms-overflow-style:none;
-overflow:-moz-scrollbars-none;
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "PingFang TC", "Source Han Sans SC", "Source Han Sans TC", "Noto Sans S Chinese", "Microsoft Yahei", sans-serif, Robot, Arial, verdana, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  -ms-overflow-style:none;
+  overflow:-moz-scrollbars-none;
 }
 html::-webkit-scrollbar{width:0px}
+
+/*body {
+  font-family: "PingFang SC", "PingFang TC", "Source Han Sans SC", "Source Han Sans TC", "Noto Sans S Chinese", "Microsoft Yahei", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+center {
+	text-align: center;
+	align-items: center;
+	align-content: center;
+	align-self: center;
+}*/
 
 /*注释为默认设置*/
 /*
