@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+		<meta http-equiv="cache-control" content="no-cache">
+		<meta http-equiv="description" content="Red_lnn's Home Page">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="robots" content="none">
+		<meta name="author" content="Red_lnn, w731347477@gmail.com"/>
+		<title>Minecraft 字体资源包生成器</title>
+		<meta property="og:image" content="./favicon.png"/>
+		<link rel="icon" href="./favicon.ico" type="image/x-icon" />
+		<link rel="shortcut icon" href="./favicon.ico" type="image/x-icon" />
+		<!-- Bootstrap -->
+		<link href="./css/bootstrap-4.0.0.css" rel="stylesheet">
+		<link href="./css/custom.css" rel="stylesheet">
+	</head>
+	<style>	
+		#preview-canvas {
+			width: 100%;
+			height: auto;
+			background: black;
+			border: 16px solid #ddd;
+			padding-top: 43%;
+		}
+	</style>
+
+	<body>
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+			<a class="navbar-brand"><strong>Red_lnn</strong></a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav mr-auto noselect">
+					<li class="nav-item"><a class="nav-link" href="./index.html">Home<span class="sr-only">(current)</span></a></li>
+					<li class="nav-item"><a class="nav-link disabled" href="#">Blog</a></li>
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Sns </a>
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown" style="animation: fadeIn .8s;">
+							<a class="dropdown-item" href="https://weibo.com/w731347477">Weibo</a>
+							<a class="dropdown-item" href="https://github.com/Redlnn">Github</a>
+							<a class="dropdown-item" href="https://space.bilibili.com/20858581">Bilibili</a>
+							<div class="dropdown-divider"></div>
+							<a class="dropdown-item	disabled" href="#">And more...?</a> 
+						</div>
+					</li>
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Tools </a>
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown" style="animation: fadeIn .8s;">
+							<a class="dropdown-item" href="./qc.html">文本去重</a>
+							<a class="dropdown-item active" href="#">Minecraft 字体资源包生成器</a>
+							<div class="dropdown-divider"></div>
+							<a class="dropdown-item disabled" href="#">And more...?</a> 
+						</div>
+					</li>
+				</ul>
+				<ul class="form-inline my-2 my-lg-0 navbar-nav">
+					<li class="nav-item"><a class="nav-link disabled">home.redlnn.top</a></li>
+				</ul>
+			</div>
+		</nav>	
+		<div class="jumbotron" style="animation: fadeIn 0.5s;">
+			<div class="container" style="animation: fadeIn 2s; margin-top: -28px; margin-bottom: -28px" align="center">
+			<font size="5">Minecraft 字体资源包生成器</font>
+			<div id="mark" class="row" style="animation: fadeIn 1s; background:#fff; padding:13px 0 13px 16px; border-radius: 10px; margin:15px 0 16px 0;">
+			<div class="col-md-3 justify-content-center align-self-center">
+				<canvas id="preview-canvas"></canvas>
+				<div id="preview-info">加载中...</div>
+			</div>
+			<div class="col-md-9 justify-content-center align-self-center">
+				<div>
+					<form>
+						<div class="fontname input-group mb-3">
+							<div class="input-group-prepend">
+								<span class="input-group-text" id="basic-addon1">字体名称</span>
+							</div>
+							<div class="form-control">
+								<input name="fontname" value="Robot" style="border:0;width:100%;"/>
+							</div>
+						</div>
+						<div class="fontsize input-group mb-3">
+							<div class="input-group-prepend">
+								<span class="input-group-text" id="basic-addon1">字体大小</span>
+							</div>
+							<div class="form-control">
+								<input name="fontsize" type="number" min="6" step="1" value="14" style="border:0;width:100%;"/>
+							</div>
+						</div>
+						<div class="gridsize input-group mb-3">
+							<div class="input-group-prepend">
+								<span class="input-group-text" id="basic-addon1">网格大小</span>
+							</div>
+							<div class="form-control">
+								<input name="gridsize" type="number" min="8" step="1" value="16" style="border:0;width:100%;"/>
+							</div>
+						</div>
+						<div class="yoffset input-group mb-3">
+							<div class="input-group-prepend">
+								<span class="input-group-text" id="basic-addon1">Y 轴偏移</span>
+							</div>
+							<div class="form-control">
+								<input name="yoffset" type="number" value="0" style="border:0;width:100%;"/>
+							</div>
+						</div>
+						<div class="metamode input-group mb-3">
+							<div class="input-group-prepend">
+								<span class="input-group-text" id="basic-addon1">Meta格式</span>
+							</div>
+							<select name="metamode" class="custom-select" id="inputGroupSelect01" onchange="change_pack_format()">
+								<option value="Java_Edition" selected>Java 版</option>
+								<option value="Bedrock_Edition">基岩版</option>
+							</select>
+						</div>
+						<div class="pack_format input-group mb-3">
+							<div class="input-group-prepend">
+								<span class="input-group-text" id="basic-addon1">资源包版本</span>
+							</div>
+							<div class="form-control">
+								<input  id="pack_format" name="pack_format" type="number" value="1" min="1" style="border:0;width:100%;"/>
+							</div>
+						</div>
+						<div class="description_format  input-group mb-3">
+							<div class="input-group-prepend">
+								<span class="input-group-text" id="basic-addon1">资源包描述</span>
+							</div>
+							<div class="form-control">
+								<input name="description_format" value="%s字体资源包 %dx(%d)" style="border:0;width:100%;"/>
+							</div>
+						</div>
+					</form>
+						<button id="gen_btn" class="btn btn-primary">开始生成</button>
+						<button id="reset_btn" class="btn btn-primary">重置选项</button>
+				</div>
+			</div>
+			</div>
+			<div class="col-12" style="color: #9e9e9e">
+				<p>本工具以 GPL 3.0 协议开源
+				<br/><a href="https://github.com/Redlnn/minecraft-unicode-font-texture-generator-onlin">https://github.com/Redlnn/minecraft-unicode-font-texture-generator-online</a></p>
+			</div>
+			</div>
+		</div>
+
+	</body>
+	<footer class="text-center" style="animation: fadeIn 2.5s; margin-top: 20px;">
+		<div class="container">
+			<div class="row">
+				<div class="col-12" style="color: #9e9e9e">
+					<p style="margin-bottom: 5px">Copyright © 2018 - 2019 Red_lnn's Homepage</p>
+					<p>Powered by <a href="https://github.com/twbs/bootstrap#copyright-and-license" style="color: #6b6b6b">Bootstrap</a> 4.0.0</p>
+				</div>
+			</div>
+		</div>
+	</footer>
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
+	<script src="./js/jquery-3.4.1.min.js"></script> 
+	<!-- Include all compiled plugins (below), or include individual files as needed --> 
+	<script src="./js/popper.min.js"></script> 
+	<script src="./js/bootstrap-4.0.0.js"></script>
+	<script src="./js/mouse.js"></script>
+	<script src="./js/sprintf.js">	</script>
+	<script src="./js/jszip.min.js"></script>
+	<script src="./js/FileSaver.min.js"></script>
+	<script>
+		function change_pack_format() {
+				$("#pack_format").val(1);
+		}
+
+		(function () {
+			"use strict";
+			const preview_canvas = document.querySelector("#preview-canvas");
+			const preview_info = document.querySelector("#preview-info");
+			const gen_btn = document.querySelector("#gen_btn");
+			const reset_btn = document.querySelector("#reset_btn");
+			const form = document.forms[0];
+			const stripDataurl = dataurl => dataurl.substr(dataurl.indexOf(',') + 1);
+			const updateProgress = ch => preview_info.innerText = sprintf("正在生成的图像：%02x (%5.1f%%)", ch, ch / 0xFF * 100);
+
+			const uuidv4 = () => 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+				var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+				return v.toString(16);
+			});
+
+			const lock = (() => {
+				let startStatus = false;
+				let stopStatus = false;
+				return {
+					init() {
+						if (startStatus) {
+							stopStatus = true;
+							return true;
+						}
+						startStatus = true;
+						stopStatus = false;
+						preview_info.innerText = "开始中...";
+						gen_btn.innerText = "停止 !";
+						return false;
+					},
+					stop() {
+						startStatus = false;
+						preview_info.innerText = "就绪...";
+						gen_btn.innerText = "开始生成!";
+					},
+					sholdAbort() {
+						if (stopStatus) {
+							lock.stop();
+							return true;
+						}
+						return false;
+					}
+				}
+			})();
+
+			const getRadio = radios => Array.from(radios).find(r => r.checked).value;
+
+			gen_btn.addEventListener("click", () => {
+				if (lock.init()) return;
+				const zip = new JSZip();
+				const ctx = preview_canvas.getContext('2d');
+				const glyph_sizes = new Uint8Array(64 * 1024);
+				const yoffset = parseInt(form.elements.yoffset.value);
+				const fontsize = form.elements.fontsize.value;
+				const fontname = form.elements.fontname.value;
+				const gridsize = form.elements.gridsize.value;
+				const metamode = form.elements.metamode.value || getRadio(form.elements.metamode);
+				const pack_format = parseInt(form.elements.pack_format.value);
+				const description_format = form.elements.description_format.value;
+				let formatstring, glyph_sizes_bin
+
+				switch (metamode) {
+					case 'Java_Edition':
+					formatstring = 'assets/minecraft/textures/font/unicode_page_%02x.png'
+						glyph_sizes_bin = 'assets/minecraft/font/glyph_sizes.bin'
+						break;
+					case 'Bedrock_Edition':
+						formatstring = 'font/glyph_%02X.png'
+						break;
+				}
+
+				document.querySelector("#preview-canvas").style.paddingTop = 0;
+				preview_canvas.width = gridsize * 16;
+				preview_canvas.height = gridsize * 16;
+				ctx.fillStyle = "white";
+				ctx.font = sprintf("%dpx %s", fontsize, fontname);
+				ctx.textBaseline = "top";
+
+				const drawCharAt = (size, ch, x, y) => {
+					ctx.clearRect(x, y, size, size);
+					ctx.fillText(ch, x, y + yoffset);
+					return (n => n > 0xF ? 0xF : n)(ctx.measureText(ch).width / size * 0xF);
+				};
+				const drawPage = (start, grid) => {
+					for (let i = 0; i < 16; i++)
+						for (let j = 0; j < 16; j++)
+							glyph_sizes[(start << 8) + i * 16 + j] = drawCharAt(grid, String.fromCharCode((start << 8) + i * 16 + j), j * grid, i * grid);
+				};
+				const draw = current => {
+					if (lock.sholdAbort()) return ctx.clearRect(0, 0, preview_canvas.width, preview_canvas.height);
+					if (metamode == 'Bedrock_Edition' && (current == 0xe0 || current == 0xe1)) return setTimeout(() => draw(current + 1), 10);
+					updateProgress(current);
+					ctx.clearRect(0, 0, preview_canvas.width, preview_canvas.height);
+					drawPage(current, gridsize);
+					zip.file(sprintf(formatstring, current), stripDataurl(preview_canvas.toDataURL("image/png")), { createFolders: true, base64: true });
+					if (current == 0xff) return finish();
+					setTimeout(() => draw(current + 1), 10);
+				};
+				draw(0);
+				const finish = () => {
+					if (glyph_sizes_bin) {
+						preview_info.innerText = "storing glyph_sizes.bin";
+						zip.file(glyph_sizes_bin, glyph_sizes, { binary: true, createFolders: true });
+					}
+					switch (metamode) {
+						case 'Java_Edition':
+							preview_info.innerText = "creating metafile";
+							zip.file("pack.mcmeta", JSON.stringify({ pack: { pack_format, description: sprintf(description_format, fontname, gridsize, fontsize) } }, null, '\t'));
+							break;
+						case 'Bedrock_Edition':
+							preview_info.innerText = "creating metafile";
+							zip.file("manifest.json", JSON.stringify({
+								format_version: pack_format,
+								header: {
+									uuid: uuidv4(),
+									name: sprintf("%s x%d(%d)", fontname, gridsize, fontsize),
+									version: [0, 0, 1],
+									description: sprintf(description_format, fontname, gridsize, fontsize)
+								},
+								modules: [{
+									description: sprintf(description_format, fontname, gridsize, fontsize),
+									version: [0, 0, 1],
+									uuid: uuidv4(),
+									type: "resources"
+								}]
+							}, null, '\t'));
+					}
+					preview_info.innerText = "已完成...打包 zip 文件中...."
+					zip.generateAsync({ type: "blob" }).then(content => {
+						saveAs(content, sprintf("%s字体_x%d(%d)_%s.%s", fontname, gridsize, fontsize, metamode, metamode == 'Java_Edition' ? 'zip' : 'mcpack'));
+						lock.stop();
+					});
+				ctx.clearRect(0, 0, preview_canvas.width, preview_canvas.height);
+				};
+			});
+			reset_btn.addEventListener("click", () => {
+				form.reset();
+			});
+
+			preview_info.innerText = "就绪..."
+		})();
+	</script>
+</html>

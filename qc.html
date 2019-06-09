@@ -1,64 +1,64 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta http-equiv="cache-control" content="no-cache">
-    <meta http-equiv="description" content="Red_lnn's Home Page">
-    <meta property="og:image" content="./favicon.png"/>
-    <meta name="author" content="Red_lnn, w731347477@gmail.com"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="robots" content="none">
-    <meta name="keywords" content="去重,文本在线去重复">
-    <meta name="description" content="本程序在线去除文本重复,js重复,java数组重复,txt重复,是最好用的去重复工具。">
-    <title>文本去重工具</title>
-    <link rel="icon" href="./favicon.ico" type="image/x-icon" />
-    <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
-    <!-- Bootstrap -->
-    <link href="./css/bootstrap-4.0.0.css" rel="stylesheet">
-    <link href="./css/custom.css" rel="stylesheet">
-  </head>
-  <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand"><strong>Red_lnn</strong></a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto noselect">
-          <li class="nav-item"><a class="nav-link" href="./index.html">Home<span class="sr-only">(current)</span></a></li>
-          <li class="nav-item"><a class="nav-link disabled" href="#">Blog</a></li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Sns </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="animation: fadeIn .8s;">
-              <a class="dropdown-item" href="https://weibo.com/w731347477">Weibo</a>
-              <a class="dropdown-item" href="https://github.com/Redlnn">Github</a>
-              <a class="dropdown-item" href="https://space.bilibili.com/20858581">Bilibili</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item  disabled" href="#">And more...?</a> 
-            </div>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Tools </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="animation: fadeIn .8s;">
-              <a class="dropdown-item active" href="./qc.html">文本去重</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item disabled" href="#">And more...?</a> 
-            </div>
-          </li>
-        </ul>
-        <ul class="form-inline my-2 my-lg-0 navbar-nav">
-          <li class="nav-item"><a class="nav-link disabled">home.redlnn.top</a></li>
-        </ul>
-      </div>
-    </nav>
-    <header class="jumbotron" align="center">
-      <div class="container" style="animation: fadeIn 2s; margin-top: -28px" align="center">
-        <p>
-          <font size="5">在线文本去重工具</font><font size="3"> (</font><a target="_blank" href="http://wenbenbijiao.renrensousuo.com/"><font color="#0000FF" size="3">文本比较工具</font></a><font size="3">)</font>
-        </p>
-          <div class="container" style="width:80%">
-            <div id="mark" class="row" style="animation: fadeIn 2s;">
-              <div class="col-md-5 justify-content-center align-self-center">
-                <textarea name="neirong" id="neirong" class="form-control" type="text" style=" overflow:auto; resize:none;" rows="15%" autocomplete="off">下面是重复内容，可以点击进行测试：
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta http-equiv="cache-control" content="no-cache">
+		<meta http-equiv="description" content="Red_lnn's Home Page">
+		<meta name="author" content="Red_lnn, w731347477@gmail.com"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="robots" content="none">
+		<meta name="keywords" content="去重,文本在线去重复">
+		<meta name="description" content="本程序在线去除文本重复,js重复,java数组重复,txt重复,是最好用的去重复工具。">
+		<title>文本去重工具</title>
+	<meta property="og:image" content="./favicon.png"/>
+		<link rel="icon" href="./favicon.ico" type="image/x-icon" />
+		<link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
+		<!-- Bootstrap -->
+		<link href="./css/bootstrap-4.0.0.css" rel="stylesheet">
+		<link href="./css/custom.css" rel="stylesheet">
+	</head>
+	<body>
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+			<a class="navbar-brand"><strong>Red_lnn</strong></a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav mr-auto noselect">
+					<li class="nav-item"><a class="nav-link" href="./index.html">Home<span class="sr-only">(current)</span></a></li>
+					<li class="nav-item"><a class="nav-link disabled" href="#">Blog</a></li>
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Sns </a>
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown" style="animation: fadeIn .8s;">
+							<a class="dropdown-item" href="https://weibo.com/w731347477">Weibo</a>
+							<a class="dropdown-item" href="https://github.com/Redlnn">Github</a>
+							<a class="dropdown-item" href="https://space.bilibili.com/20858581">Bilibili</a>
+							<div class="dropdown-divider"></div>
+							<a class="dropdown-item	disabled" href="#">And more...?</a> 
+						</div>
+					</li>
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Tools </a>
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown" style="animation: fadeIn .8s;">
+							<a class="dropdown-item active" href="#">文本去重</a>
+							<a class="dropdown-item" href="./mcfont.html">Minecraft 字体资源包生成器</a>
+							<div class="dropdown-divider"></div>
+							<a class="dropdown-item disabled" href="#">And more...?</a> 
+						</div>
+					</li>
+				</ul>
+				<ul class="form-inline my-2 my-lg-0 navbar-nav">
+					<li class="nav-item"><a class="nav-link disabled">home.redlnn.top</a></li>
+				</ul>
+			</div>
+		</nav>
+		<header class="jumbotron" align="center">
+			<div class="container" style="animation: fadeIn 2s; margin-top: -28px" align="center">
+				<p>
+					<font size="5">在线文本去重工具</font><font size="3"> (</font><a target="_blank" href="http://wenbenbijiao.renrensousuo.com/"><font color="#0000FF" size="3">文本比较工具</font></a><font size="3">)</font>
+				</p>
+					<div style="width:80%">
+						<div id="mark" class="row" style="animation: fadeIn 2s;">
+							<div class="col-md-5 justify-content-center align-self-center">
+								<textarea name="neirong" id="neirong" class="form-control" type="text" style=" overflow:auto; resize:none;" rows="15%" autocomplete="off">下面是重复内容，可以点击进行测试：
 
 12345678
 
@@ -76,54 +76,54 @@
 
 
 87654321</textarea>
-              </div>
-              <div class="col-md-2 text-center align-self-center">
-                <p></p>
-                <input value=" 去重 " class="btn btn-primary" onclick="return sx();" type="button" align="center">
-                <p></p>
-              </div>
-              <div class="col-md-5 justify-content-center align-self-center">
-                <textarea readonly name="neirong1" id="neirong1" class="form-control" type="text" style="overflow:auto; resize:none;" rows="15%" autocomplete="off"></textarea>
-              </div>
-            </div>
-          </div>
-        <script type="text/javascript">
-          function sx(){
-            var rntArray=[],temp,hasValue;
-            var array=document.getElementById("neirong").value.split("\n");
-            for(var i in array){
-              temp=array[i];
-              hasValue=false;
-              for(var j in rntArray){
-                if(temp===rntArray[j]){
-                  hasValue=true;
-                  break;
-                }
-              }
-              if(hasValue===false){
-                rntArray.push(temp);
-              }
-            }
-            document.getElementById("neirong1").value=rntArray.join("\n");
-          }
-        </script>
-      </div>
-    </header>
-  </body>
-  <footer class="text-center" style="animation: fadeIn 2.5s; margin-top: 20px;">
-      <div class="container">
-        <div class="row">
-          <div class="col-12" style="color: #9e9e9e">
-            <p style="margin-bottom: 5px">Copyright © 2018 - 2019 Red_lnn's Homepage</p>
-            <p>Powered by <a href="https://github.com/twbs/bootstrap#copyright-and-license" style="color: #6b6b6b">Bootstrap</a> 4.0.0</p>
-          </div>
-        </div>
-      </div>
-    </footer>
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
-    <script src="./js/jquery-3.2.1.min.js"></script> 
-    <!-- Include all compiled plugins (below), or include individual files as needed --> 
-    <script src="./js/popper.min.js"></script> 
-    <script src="./js/bootstrap-4.0.0.js"></script>
+							</div>
+							<div class="col-md-2 text-center align-self-center">
+								<p></p>
+								<input value=" 去重 " class="btn btn-primary" onclick="return sx();" type="button" align="center">
+								<p></p>
+							</div>
+							<div class="col-md-5 justify-content-center align-self-center">
+								<textarea readonly name="neirong1" id="neirong1" class="form-control" type="text" style="overflow:auto; resize:none;" rows="15%" autocomplete="off"></textarea>
+							</div>
+						</div>
+					</div>
+				<script type="text/javascript">
+					function sx(){
+						var rntArray=[],temp,hasValue;
+						var array=document.getElementById("neirong").value.split("\n");
+						for(var i in array){
+							temp=array[i];
+							hasValue=false;
+							for(var j in rntArray){
+								if(temp===rntArray[j]){
+									hasValue=true;
+									break;
+								}
+							}
+							if(hasValue===false){
+								rntArray.push(temp);
+							}
+						}
+						document.getElementById("neirong1").value=rntArray.join("\n");
+					}
+				</script>
+			</div>
+		</header>
+	</body>
+	<footer class="text-center" style="animation: fadeIn 2.5s; margin-top: 20px;">
+		<div class="container">
+			<div class="row">
+				<div class="col-12" style="color: #9e9e9e">
+					<p style="margin-bottom: 5px">Copyright © 2018 - 2019 Red_lnn's Homepage</p>
+					<p>Powered by <a href="https://github.com/twbs/bootstrap#copyright-and-license" style="color: #6b6b6b">Bootstrap</a> 4.0.0</p>
+				</div>
+			</div>
+		</div>
+	</footer>
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
+	<script src="./js/jquery-3.4.1.min.js"></script> 
+	<!-- Include all compiled plugins (below), or include individual files as needed --> 
+	<script src="./js/popper.min.js"></script> 
+	<script src="./js/bootstrap-4.0.0.js"></script>
 	<script src="./js/mouse.js"></script>
 </html>
