@@ -24,7 +24,9 @@
 			padding-top: 43%;
 		}
 	</style>
-
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
+	<script src="./js/jquery-3.4.1.min.js"></script> 
+	<script src="./js/mouse.js"></script>
 	<body>
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
 			<a class="navbar-brand"><strong>Red_lnn</strong></a>
@@ -49,95 +51,102 @@
 							<a class="dropdown-item" href="./qc.html">文本去重</a>
 							<a class="dropdown-item active" href="#">Minecraft 字体资源包生成器</a>
 							<div class="dropdown-divider"></div>
-							<a class="dropdown-item disabled" href="#">And more...?</a> 
+							<a class="dropdown-item" href="#">And more...?</a> 
 						</div>
 					</li>
 				</ul>
 				<ul class="form-inline my-2 my-lg-0 navbar-nav">
-					<li class="nav-item"><a class="nav-link disabled">home.redlnn.top</a></li>
+					<li class="nav-item"><a class="nav-link" href="https://github.com/Redlnn/redlnn.github.io">home.redlnn.top</a></li>
 				</ul>
 			</div>
 		</nav>	
 		<div class="jumbotron" style="animation: fadeIn 0.5s;">
-			<div class="container" style="animation: fadeIn 2s; margin-top: -28px; margin-bottom: -28px" align="center">
-			<font size="5">Minecraft 字体资源包生成器</font>
-			<div id="mark" class="row" style="animation: fadeIn 1s; background:#fff; padding:13px 0 13px 16px; border-radius: 10px; margin:15px 0 16px 0;">
-			<div class="col-md-3 justify-content-center align-self-center">
-				<canvas id="preview-canvas"></canvas>
-				<div id="preview-info">加载中...</div>
-			</div>
-			<div class="col-md-9 justify-content-center align-self-center">
-				<div>
-					<form>
-						<div class="fontname input-group mb-3">
-							<div class="input-group-prepend">
-								<span class="input-group-text" id="basic-addon1">字体名称</span>
+			<div class="container" style="animation: fadeIn 2s; margin-top: -28px; margin-bottom: -38px" align="center">
+				<div style="margin-top:20px"><h2>Minecraft 字体资源包生成器<h2></div>
+				<div id="mark" class="row" style="animation: fadeIn 1s; background:#fff; padding:28px 20px 28px 20px; border-radius: 10px; margin:15px 0 16px 0;">
+					<div class="col-lg-3 col-md-5 col-sm-12 col-xs-12 justify-content-center align-self-center">
+						<canvas id="preview-canvas"></canvas>
+						<div id="preview-info">加载中...</div>
+						<br/>
+					</div>
+					<div class="col-lg-9 col-md-7 col-sm-12 col-xs-12 justify-content-center align-self-center">
+						<form>
+							<div class="input-group mb-3">
+								<div class="input-group-prepend">
+									<span class="input-group-text" id="basic-addon1">字体名称</span>
+								</div>
+								<div class="form-control">
+									<input name="fontname" value="Robot" style="border:0;width:100%;"/>
+								</div>
 							</div>
-							<div class="form-control">
-								<input name="fontname" value="Robot" style="border:0;width:100%;"/>
+							<div class="input-group mb-3">
+								<div class="input-group-prepend">
+									<span class="input-group-text" id="basic-addon1">字体大小</span>
+								</div>
+								<div class="form-control">
+									<input name="fontsize" type="number" min="6" step="1" value="14" style="border:0;width:100%;"/>
+								</div>
 							</div>
-						</div>
-						<div class="fontsize input-group mb-3">
-							<div class="input-group-prepend">
-								<span class="input-group-text" id="basic-addon1">字体大小</span>
+							<div class="input-group mb-3">
+								<div class="input-group-prepend">
+									<span class="input-group-text" id="basic-addon1">网格大小</span>
+								</div>
+								<div class="form-control">
+									<input name="gridsize" type="number" min="8" step="1" value="16" style="border:0;width:100%;"/>
+								</div>
 							</div>
-							<div class="form-control">
-								<input name="fontsize" type="number" min="6" step="1" value="14" style="border:0;width:100%;"/>
+							<div class="input-group mb-3">
+								<div class="input-group-prepend">
+									<span class="input-group-text" id="basic-addon1"> Y 轴偏移</span>
+								</div>
+								<div class="form-control">
+									<input name="yoffset" type="number" value="0" style="border:0;width:100%;"/>
+								</div>
 							</div>
-						</div>
-						<div class="gridsize input-group mb-3">
-							<div class="input-group-prepend">
-								<span class="input-group-text" id="basic-addon1">网格大小</span>
+							<div class="input-group mb-3">
+								<div class="input-group-prepend">
+									<span class="input-group-text" id="basic-addon1">Meta格式</span>
+								</div>
+								<select name="metamode" class="custom-select" id="inputGroupSelect01" onchange="change_pack_format()">
+									<option value="Java_Edition" selected>Java 版</option>
+									<option value="Bedrock_Edition">基岩版</option>
+								</select>
 							</div>
-							<div class="form-control">
-								<input name="gridsize" type="number" min="8" step="1" value="16" style="border:0;width:100%;"/>
+							<div class="input-group mb-3">
+								<div class="input-group-prepend">
+									<span class="input-group-text" id="basic-addon1">资源包版本</span>
+								</div>
+								<div class="form-control">
+									<input  id="pack_format" name="pack_format" type="number" value="1" min="1" style="border:0;width:100%;"/>
+								</div>
 							</div>
-						</div>
-						<div class="yoffset input-group mb-3">
-							<div class="input-group-prepend">
-								<span class="input-group-text" id="basic-addon1">Y 轴偏移</span>
+							<div class="input-group mb-3">
+								<div class="input-group-prepend">
+									<span class="input-group-text" id="basic-addon1">资源包描述</span>
+								</div>
+								<div class="form-control">
+									<input name="description_format" value="%s字体资源包 %dx(%d)" style="border:0;width:100%;"/>
+								</div>
 							</div>
-							<div class="form-control">
-								<input name="yoffset" type="number" value="0" style="border:0;width:100%;"/>
-							</div>
-						</div>
-						<div class="metamode input-group mb-3">
-							<div class="input-group-prepend">
-								<span class="input-group-text" id="basic-addon1">Meta格式</span>
-							</div>
-							<select name="metamode" class="custom-select" id="inputGroupSelect01" onchange="change_pack_format()">
-								<option value="Java_Edition" selected>Java 版</option>
-								<option value="Bedrock_Edition">基岩版</option>
-							</select>
-						</div>
-						<div class="pack_format input-group mb-3">
-							<div class="input-group-prepend">
-								<span class="input-group-text" id="basic-addon1">资源包版本</span>
-							</div>
-							<div class="form-control">
-								<input  id="pack_format" name="pack_format" type="number" value="1" min="1" style="border:0;width:100%;"/>
-							</div>
-						</div>
-						<div class="description_format  input-group mb-3">
-							<div class="input-group-prepend">
-								<span class="input-group-text" id="basic-addon1">资源包描述</span>
-							</div>
-							<div class="form-control">
-								<input name="description_format" value="%s字体资源包 %dx(%d)" style="border:0;width:100%;"/>
-							</div>
-						</div>
-					</form>
-						<button id="gen_btn" class="btn btn-primary">开始生成</button>
-						<button id="reset_btn" class="btn btn-primary">重置选项</button>
+						</form>
+						<button id="gen_btn" class="btn btn-primary" style="margin-right:8px;">开始生成</button>
+						<button id="reset_btn" class="btn btn-primary" style="margin-left:8px;">重置选项</button>
+					</div>
+					<div class="col-md-1 col-xs-0"></div>
+					<div class="col--md-11 col-xs-12 text-left" style="margin-top:25px;">
+						<h3>使用说明：</h3>
+						<ul>
+							<li>字体名称请输入您设备上安装的字体</li>
+							<li>基岩版资源包版本必须为 " 1 "</li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-12" style="color: #9e9e9e; padding-bottom:20px">
+					<p>本工具以 GPL 3.0 协议开源
+					<br/><a href="https://github.com/Redlnn/minecraft-unicode-font-texture-generator-online/tree/patch-1">https://github.com/Redlnn/minecraft-unicode-font-texture-generator-online/tree/patch-1</a></p>
 				</div>
 			</div>
-			</div>
-			<div class="col-12" style="color: #9e9e9e">
-				<p>本工具以 GPL 3.0 协议开源</p>
-			</div>
-			</div>
 		</div>
-
 	</body>
 	<footer class="text-center" style="animation: fadeIn 2.5s; margin-top: 20px;">
 		<div class="container">
@@ -149,12 +158,9 @@
 			</div>
 		</div>
 	</footer>
-	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
-	<script src="./js/jquery-3.4.1.min.js"></script> 
 	<!-- Include all compiled plugins (below), or include individual files as needed --> 
 	<script src="./js/popper.min.js"></script> 
 	<script src="./js/bootstrap-4.0.0.js"></script>
-	<script src="./js/mouse.js"></script>
 	<script src="./js/sprintf.js">	</script>
 	<script src="./js/jszip.min.js"></script>
 	<script src="./js/FileSaver.min.js"></script>

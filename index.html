@@ -15,6 +15,9 @@
 		<link href="./css/bootstrap-4.0.0.css" rel="stylesheet">
 		<link href="./css/custom.css" rel="stylesheet">
 	</head>
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
+	<script src="./js/jquery-3.4.1.min.js"></script> 
+	<script src="./js/mouse.js"></script>
 	<body>
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
 			<a class="navbar-brand"><strong>Red_lnn</strong></a>
@@ -44,7 +47,7 @@
 					</li>
 				</ul>
 				<ul class="form-inline my-2 my-lg-0 navbar-nav">
-					<li class="nav-item"><a class="nav-link disabled">home.redlnn.top</a></li>
+					<li class="nav-item"><a class="nav-link" href="https://github.com/Redlnn/redlnn.github.io">home.redlnn.top</a></li>
 				</ul>
 			</div>
 		</nav>
@@ -52,7 +55,7 @@
 			<div class="jumbotron" style="animation: fadeIn 0.5s;">
 				<div class="container" align="center">
 					<div id="search" class="g-ib" style="width:80%">
-							<a href="https://google.com.hk"><img hidefocus="true" src="https://miao.su/images/2019/06/10/Google247fa.gif" width="40%" alt="Google logo, click open Google" class="noselect" style="animation: fadeIn 3.5s; margin-bottom: -10px; margin-top: -28px"></a>
+							<a href="https://google.com.hk"><img hidefocus="true" src="https://miao.su/images/2019/06/10/Google247fa.gif" width="45%" alt="Google logo, click open Google" class="noselect" style="animation: fadeIn 3.5s; margin-bottom: -10px; margin-top: -28px"></a>
 						<form id="search-form" class="search_bar" action="https://www.baidu.com/s" target="_self" style="margin-bottom: -3px">
 							<input type="submit" id="search_submit" value="☯">
 						<span>
@@ -72,37 +75,37 @@
 		<section>
 			<div class="container">
 				<div id="mark" class="row noselect" style="animation: fadeIn 2s;">
-					<div class="col-lg-4 col-md-6 col-sm-12 text-center"> <a href="https://www.bilibili.com">
+					<div class="col-lg-4 col-md-6 col-sm-6 text-center"> <a href="https://www.bilibili.com">
 						<img class="rounded-circle" alt="1340x110" style="width: 110px; height: 110px;" src="./images/bilibili.png" data-holder-rendered="true">
 						<p> </p>
 						<h3>哔哩哔哩 (゜-゜) つロ 干杯~</h3>
 						<p>bilibili 是一家弹幕站点，大家可以在这里找到许多的欢乐....</p> </a>
 					</div>
-					<div class="col-lg-4 col-md-6 col-sm-12 text-center"> <a href="http://www.mcbbs.net/forum.php">
+					<div class="col-lg-4 col-md-6 col-sm-6 col-sm-6 text-center"> <a href="http://www.mcbbs.net/forum.php">
 						<img class="rounded-circle" alt="110x110" style="width: 110px; height: 110px;" src="./images/mcbbs.png" data-holder-rendered="true">
 						<p> </p>
 						<h3>Minecraft (我的世界) 中文论坛</h3>
 						<p>Minecraft 中文站，我的世界中文论坛，我的世界论坛</p> </a>
 					</div>
-					<div class="col-lg-4 col-md-6 col-sm-12 text-center"> <a href="https://weibo.com">
+					<div class="col-lg-4 col-md-6 col-sm-6 col-sm-6 text-center"> <a href="https://weibo.com">
 						<img class="rounded-circle" alt="110x110" style="width: 110px; height: 110px;" src="./images/weibo.png" data-holder-rendered="true">
 						<p> </p>
 						<h3>新浪微博</h3>
 						<p>微博 - 随时随地发现新鲜事</p> </a>
 					</div>
-					<div class="col-lg-4 col-md-6 col-sm-12 text-center"> <a href="https://www.google.com.hk">
+					<div class="col-lg-4 col-md-6 col-sm-6 col-sm-6 text-center"> <a href="https://www.google.com.hk">
 						<img class="rounded-circle" alt="110x110" style="width: 110px; height: 110px;" src="./images/google.png" data-holder-rendered="true">
 						<p> </p>
 						<h3>Google HK</h3>
 						<p>Google 搜索是 Google 公司推出的互联网上最大、影响最广泛的搜索引擎。</p> </a>
 					</div>
-					<div class="col-lg-4 col-md-6 col-sm-12 text-center"> <a href="https://minecraft.net">
+					<div class="col-lg-4 col-md-6 col-sm-6 col-sm-6 text-center"> <a href="https://minecraft.net">
 						<img class="rounded-circle" alt="110x110" style="width: 110px; height: 110px;" src="./images/mc.png" data-holder-rendered="true">
 						<p> </p>
 						<h3>官方网站 | Minecraft</h3>
 						<p>我的世界是一款堆方块、不断冒险的游戏。在此了解最新消息和社区的精彩创意！</p> </a>
 					</div>
-					<div class="col-lg-4 col-md-6 col-sm-12 text-center"> <a href="https://twitter.com">
+					<div class="col-lg-4 col-md-6 col-sm-6 col-sm-6 text-center"> <a href="https://twitter.com">
 						<img class="rounded-circle" alt="110x110" style="width: 110px; height: 110px;" src="./images/twitter.png" data-holder-rendered="true">
 						<p> </p>
 						<h3>Twitter</h3>
@@ -121,12 +124,9 @@
 				</div>
 			</div>
 		</footer>
-		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
-		<script src="./js/jquery-3.4.1.min.js"></script> 
-		<!-- Include all compiled plugins (below), or include individual files as needed --> 
-		<script src="./js/popper.min.js"></script> 
-		<script src="./js/bootstrap-4.0.0.js"></script>
-		<script src="./js/search.js"></script>
-	<script src="./js/mouse.js"></script>
 	</body>
+	<!-- Include all compiled plugins (below), or include individual files as needed --> 
+	<script src="./js/popper.min.js"></script> 
+	<script src="./js/bootstrap-4.0.0.js"></script>
+	<script src="./js/search.js"></script>
 </html>
