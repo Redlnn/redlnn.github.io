@@ -107,7 +107,7 @@
 								<div class="input-group-prepend">
 									<span class="input-group-text" id="basic-addon1">Meta格式</span>
 								</div>
-								<select name="metamode" class="custom-select" id="inputGroupSelect01" onchange="change_pack_format()">
+								<select name="metamode" class="custom-select" id="inputGroupSelect01" >
 									<option value="Java_Edition" selected>Java 版</option>
 									<option value="Bedrock_Edition">基岩版</option>
 								</select>
@@ -137,7 +137,7 @@
 						<h3>使用说明：</h3>
 						<ul>
 							<li>字体名称请输入您设备上安装的字体</li>
-							<li>基岩版资源包版本必须为 " 1 "</li>
+							<li>基岩版资源包版本自动为 " 1 "</li>
 						</ul>
 					</div>
 				</div>
@@ -165,10 +165,6 @@
 	<script src="./js/jszip.min.js"></script>
 	<script src="./js/FileSaver.min.js"></script>
 	<script>
-		function change_pack_format() {
-				$("#pack_format").val(1);
-		}
-
 		(function () {
 			"use strict";
 			const preview_canvas = document.querySelector("#preview-canvas");
@@ -226,9 +222,15 @@
 				const fontname = form.elements.fontname.value;
 				const gridsize = form.elements.gridsize.value;
 				const metamode = form.elements.metamode.value || getRadio(form.elements.metamode);
-				const pack_format = parseInt(form.elements.pack_format.value);
+				
 				const description_format = form.elements.description_format.value;
 				let formatstring, glyph_sizes_bin
+				
+				if(metamode=="Java_Edition"){
+					const pack_format = parseInt(form.elements.pack_format.value);
+				}else{
+					const pack_format = 1;
+				}
 
 				switch (metamode) {
 					case 'Java_Edition':
