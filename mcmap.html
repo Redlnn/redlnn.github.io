@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+		<meta http-equiv="cache-control" content="no-cache">
+		<meta http-equiv="description" content="Red_lnn's Home Page">
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="robots" content="none">
+		<meta name="author" content="Red_lnn, w731347477@gmail.com"/>
+		<meta name="keywords" content="Minecraft,地图画,mc,我的世界,生成">
+		<meta name="description" content="本程序可在线生成Minecraft地图画文件。">
+		<title>Minecraft 地图画生成器</title>
+		<meta property="og:image" content="./favicon.png"/>
+		<link rel="icon" href="./favicon.ico" type="image/x-icon" />
+		<link rel="shortcut icon" href="./favicon.ico" type="image/x-icon" />
+		<!-- Bootstrap -->
+		<link href="./css/bootstrap-4.0.0.css" rel="stylesheet">
+		<link href="./css/custom.css" rel="stylesheet">
+	</head>
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
+	<script src="./js/jquery-3.4.1.min.js"></script>
+	<script src="./js/pako_deflate.min.js"></script>
+	<script src="./js/nbt.js"></script>
+	<script src="./js/mouse.js"></script>
+	<script src="./js/jszip.min.js"></script>
+	<script src="./js/FileSaver.min.js"></script>
+	<body>
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+			<a class="navbar-brand"><strong>Red_lnn</strong></a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav mr-auto noselect">
+					<li class="nav-item"><a class="nav-link" href="./index.html">Home<span class="sr-only">(current)</span></a></li>
+					<li class="nav-item"><a class="nav-link disabled" href="#" onclick="wait()">Blog</a></li>
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Sns </a>
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown" style="animation: fadeIn .8s;">
+							<a class="dropdown-item" href="https://weibo.com/w731347477">Weibo</a>
+							<a class="dropdown-item" href="https://github.com/Redlnn">Github</a>
+							<a class="dropdown-item" href="https://space.bilibili.com/20858581">Bilibili</a>
+							<div class="dropdown-divider"></div>
+							<a class="dropdown-item disabled" href="#">And more...?</a> 
+						</div>
+					</li>
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Tools </a>
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown" style="animation: fadeIn .8s;">
+							<a class="dropdown-item" href="./qc.html">在线文本去重工具</a>
+							<a class="dropdown-item" href="./mcfont.html">Minecraft 字体资源包生成器</a>
+							<a class="dropdown-item active" href="#">Minecraft 地图画生成器</a>
+							<a class="dropdown-item" href="./mckuijiajia.html">Minecraft 盔甲架生成器</a>
+							<div class="dropdown-divider"></div>
+							<a class="dropdown-item" href="#">And more...?</a> 
+						</div>
+					</li>
+				</ul>
+				<ul class="form-inline my-2 my-lg-0 navbar-nav">
+					<li class="nav-item"><a class="nav-link" href="https://github.com/Redlnn/redlnn.github.io">home.redlnn.top</a></li>
+				</ul>
+			</div>
+		</nav>
+		<div class="jumbotron" style="animation: fadeIn 0.5s;">
+			<div class="container" style="animation: fadeIn 2s; margin-top: -28px; margin-bottom: -38px" align="center">
+				<div style="margin-top:20px"><h2>Minecraft 地图画生成器</h2></div>
+				<div id="mark" class="row" style="animation: fadeIn 1s; background:#fff; padding:28px 20px 28px 20px; border-radius: 10px; margin:15px 0 16px 0;">
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 justify-content-center align-self-center">
+						<div id="can" style="background-color:#e2e3e4; border-radius:5px; padding:18px 0 10px 0; height:165" >
+							<canvas hidden id="canvas" align="center" style="margin-bottom:12px"></canvas>
+							<div>
+							<label class="btn btn-primary" id="upd" for="uploader">选择一或多个图片</label>
+							<input hidden multiple="" type="file" id="uploader" accept="image/*"/>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-3 col-md-2 col-sm-0 col-xs-0 justify-content-center align-self-center"></div>
+					<div class="col-lg-6 col-md-8 col-sm-12 col-xs-12 justify-content-center align-self-center" hidden id="mut">
+						<br/>
+						<div class="input-group mb-3">
+							<div class="input-group-prepend">
+								<label class="input-group-text" for="w">水平格子数</label>
+							</div>
+							<div class="form-control">
+								<input type="number" id="w" oninput="w=+this.value;redraw()" min="1" style="border:0;width:100%;"/>
+							</div>
+						</div>
+						<div class="input-group mb-3">
+							<div class="input-group-prepend">
+								<label class="input-group-text" for="h">竖直格子数</label>
+							</div>
+							<div class="form-control">
+								<input type="number" id="h" oninput="h=+this.value;redraw()" min="1" style="border:0;width:100%;"/>
+							</div>
+						</div>
+						<div class="input-group mb-3">
+							<div class="input-group-prepend">
+								<label class="input-group-text" for="px">水平位置</label>
+							</div>
+							<div class="form-control">
+								<input type="number" id="px" oninput="px=+this.value;redraw()" value="0" style="border:0;width:100%;"/>
+							</div>
+						</div>
+						<div class="input-group mb-3">
+							<div class="input-group-prepend">
+								<label class="input-group-text" for="py">竖直位置</label>
+							</div>
+							<div class="form-control">
+								<input type="number" id="py" oninput="py=+this.value;redraw()" value="0" style="border:0;width:100%;"/>
+							</div>
+						</div>
+						<div class="input-group mb-3">
+							<div class="input-group-prepend">
+								<label class="input-group-text" for="ix">水平长度</label>
+							</div>
+							<div class="form-control">
+								<input type="number" id="ix" oninput="ix=+this.value;redraw()" style="border:0;width:100%;"/>
+							</div>
+						</div>
+						<div class="input-group mb-3">
+							<div class="input-group-prepend">
+								<label class="input-group-text" for="iy">竖直长度</label>
+							</div>
+							<div class="form-control">
+								<input type="number" id="iy" oninput="iy=+this.value;redraw()" style="border:0;width:100%;"/>
+							</div>
+						</div>
+						<div class="input-group mb-3">
+							<div class="input-group-prepend">
+								<label class="input-group-text" for="mapx">地图x坐标</label>
+							</div>
+							<div class="form-control">
+								<input type="number" id="mapx" value="0" style="border:0;width:100%;"/>
+							</div>
+						</div>
+						<div class="input-group mb-3">
+							<div class="input-group-prepend">
+								<label class="input-group-text" for="mapz">地图z坐标</label>
+							</div>
+							<div class="form-control">
+								<input type="number" id="mapz" value="0" style="border:0;width:100%;"/>
+							</div>
+						</div>
+						<div class="input-group mb-3">
+							<div class="input-group-prepend">
+								<label class="input-group-text" for="mapd">地图维度</label>
+							</div>
+							<div class="form-control">
+								<input type="number" id="mapd" value="3" style="border:0;width:100%;"/>
+							</div>
+						</div>
+						<div class="input-group mb-3">
+							<div class="input-group-prepend">
+								<label class="input-group-text" for="startcount">首地图编号</label>
+							</div>
+							<div class="form-control">
+								<input type="number" id="startcount" value="0" style="border:0;width:100%;"/>
+							</div>
+						</div>
+						<button class="btn btn-primary" id="start" onclick="start()">Start</button>
+						<button class="btn btn-primary" onclick="[...document.getElementsByClassName(&quot;downloadlink&quot;)].forEach((e,i)=>{setTimeout(()=>{e.click()},30*i)})">全部下载</button>
+						<div>
+							<br>
+						</div>
+					</div>
+					<div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 justify-content-center align-self-center"></div>
+					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 justify-content-center align-self-center">
+						<div id="downloaddiv" class="align-self-center"></div>
+					</div>
+					<div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 justify-content-center align-self-center"></div>
+					<div class="col-md-1 col-xs-0"></div>
+					<div hidden id="use" class="col-md-11 col-xs-12 text-left" style="margin-top:25px;">
+						<h3>使用说明：</h3>
+						<ul style="padding-right: 88px;">
+							<li>地图的维度: 0主世界 -1是地狱 1是末地 (Mod中加入的维度的编号请咨询Mod作者。</li>
+							<li>请将本工具生成的文件放到存档中data文件夹内</li>
+							<li>如果不了解的话建议先使用空地图创建，然后替换同名文件</li>
+							<li>若地图在选择的维度和坐标附近打开，将导致内容被覆盖。请设置成不会去的地方</li>
+							<li>请务必在退出存档后再替换文件</li>
+							<li>在存档目录的data文件夹里有map_xx.dat文件，首地图编号写你最大的那一个xx+1，如已有map_01.dat ~ map_50.dat，则首地图编号填写51</li>
+						</ul>
+					</div>
+		<!--<label id="upd" for="uploader" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);background-color: bisque;">选择一或多个图片<br>Choose one or more pictures</label>
+		<input hidden="" multiple="" type="file" id="uploader" accept="image/*"/>
+		<div hidden="" id="mut">
+			<label for="w">水平格子数</label>
+			<input type="number" id="w" oninput="w=+this.value;redraw()" min="1"/>
+			<br>
+			<label for="h">竖直格子数</label>
+			<input type="number" id="h" oninput="h=+this.value;redraw()" min="1"/>
+			<br>
+			<label for="px">水平位置</label>
+			<input type="number" id="px" oninput="px=+this.value;redraw()" value="0"/>
+			<br>
+			<label for="py">竖直位置</label>
+			<input type="number" id="py" oninput="py=+this.value;redraw()" value="0"/>
+			<br>
+			<label for="ix">水平长度</label>
+			<input type="number" id="ix" oninput="ix=+this.value;redraw()"/>
+			<br>
+			<label for="iy">竖直长度</label>
+			<input type="number" id="iy" oninput="iy=+this.value;redraw()"/>
+			<br>
+			<label for="mapx">地图x坐标</label>
+			<input type="number" id="mapx" value="0"/>
+			<br>
+			<label for="mapz">地图z坐标</label>
+			<input type="number" id="mapz" value="0"/>
+			<br>
+			<label for="mapd">地图维度</label>
+			<input type="number" id="mapd" value="3"/>
+			<br>
+			<label for="startcount">首地图编号</label>
+			<input type="number" id="startcount" value="0"/>
+			<br>
+			<button id="start" onclick="start()">start</button>
+			<button onclick="[...document.getElementsByClassName(&quot;downloadlink&quot;)].forEach((e,i)=&gt;{setTimeout(()=&gt;{e.click()},30*i)})">全部下载</button>
+		</div>
+		-->
+				</div>
+				<div class="col-12" style="color: #9e9e9e; padding-bottom: 20px;">
+					<p>本工具修改自 Mcbbs 用户 chyx 的原版
+					<br/>Mcbbs原帖：<a href="https://www.mcbbs.net/thread-874770-1-1.html" target="_blank">https://www.mcbbs.net/thread-874770-1-1.html</a></p>
+				</div>
+			</div>
+		</div>
+		<footer class="text-center" style="animation: fadeIn 2.5s; margin-top: 20px;">
+			<div class="container">
+				<div class="row">
+					<div class="col-12" style="color: #9e9e9e">
+						<p style="margin-bottom: 5px">Copyright © 2018 - 2019 Red_lnn's Homepage</p>
+						<p>Powered by <a href="https://github.com/twbs/bootstrap#copyright-and-license" style="color: #6b6b6b">Bootstrap</a> 4.0.0</p>
+					</div>
+				</div>
+			</div>
+		</footer>
+	</body>
+	<script>
+		document.getElementById('px').value=0;
+		document.getElementById('py').value=0;
+		document.getElementById('startcount').value=0;
+		colortable=[];
+		colortable[4]=[89, 125, 39];
+		colortable[5]=[109, 153, 48];
+		colortable[6]=[127, 178, 56];
+		colortable[7]=[67, 94, 29];
+		colortable[8]=[174, 164, 115];
+		colortable[9]=[213, 201, 140];
+		colortable[10]=[247, 233, 163];
+		colortable[11]=[130, 123, 86];
+		colortable[12]=[140, 140, 140];
+		colortable[13]=[171, 171, 171];
+		colortable[14]=[199, 199, 199];
+		colortable[15]=[105, 105, 105];
+		colortable[16]=[180, 0, 0];
+		colortable[17]=[220, 0, 0];
+		colortable[18]=[255, 0, 0];
+		colortable[19]=[135, 0, 0];
+		colortable[20]=[112, 112, 180];
+		colortable[21]=[138, 138, 220];
+		colortable[22]=[160, 160, 255];
+		colortable[23]=[84, 84, 135];
+		colortable[24]=[117, 117, 117];
+		colortable[25]=[144, 144, 144];
+		colortable[26]=[167, 167, 167];
+		colortable[27]=[88, 88, 88];
+		colortable[28]=[0, 87, 0];
+		colortable[29]=[0, 106, 0];
+		colortable[30]=[0, 124, 0];
+		colortable[31]=[0, 65, 0];
+		colortable[32]=[180, 180, 180];
+		colortable[33]=[220, 220, 220];
+		colortable[34]=[255, 255, 255];
+		colortable[35]=[135, 135, 135];
+		colortable[36]=[115, 118, 129];
+		colortable[37]=[141, 144, 158];
+		colortable[38]=[164, 168, 184];
+		colortable[39]=[86, 88, 97];
+		colortable[40]=[106, 76, 54];
+		colortable[41]=[130, 94, 66];
+		colortable[42]=[151, 109, 77];
+		colortable[43]=[79, 57, 40];
+		colortable[44]=[79, 79, 79];
+		colortable[45]=[96, 96, 96];
+		colortable[46]=[112, 112, 112];
+		colortable[47]=[59, 59, 59];
+		colortable[48]=[45, 45, 180];
+		colortable[49]=[55, 55, 220];
+		colortable[50]=[64, 64, 255];
+		colortable[51]=[33, 33, 135];
+		colortable[52]=[100, 84, 50];
+		colortable[53]=[123, 102, 62];
+		colortable[54]=[143, 119, 72];
+		colortable[55]=[75, 63, 38];
+		colortable[56]=[180, 177, 172];
+		colortable[57]=[220, 217, 211];
+		colortable[58]=[255, 252, 245];
+		colortable[59]=[135, 133, 129];
+		colortable[60]=[152, 89, 36];
+		colortable[61]=[186, 109, 44];
+		colortable[62]=[216, 127, 51];
+		colortable[63]=[114, 67, 27];
+		colortable[64]=[125, 53, 152];
+		colortable[65]=[153, 65, 186];
+		colortable[66]=[178, 76, 216];
+		colortable[67]=[94, 40, 114];
+		colortable[68]=[72, 108, 152];
+		colortable[69]=[88, 132, 186];
+		colortable[70]=[102, 153, 216];
+		colortable[71]=[54, 81, 114];
+		colortable[72]=[161, 161, 36];
+		colortable[73]=[197, 197, 44];
+		colortable[74]=[229, 229, 51];
+		colortable[75]=[121, 121, 27];
+		colortable[76]=[89, 144, 17];
+		colortable[77]=[109, 176, 21];
+		colortable[78]=[127, 204, 25];
+		colortable[79]=[67, 108, 13];
+		colortable[80]=[170, 89, 116];
+		colortable[81]=[208, 109, 142];
+		colortable[82]=[242, 127, 165];
+		colortable[83]=[128, 67, 87];
+		colortable[84]=[53, 53, 53];
+		colortable[85]=[65, 65, 65];
+		colortable[86]=[76, 76, 76];
+		colortable[87]=[40, 40, 40];
+		colortable[88]=[108, 108, 108];
+		colortable[89]=[132, 132, 132];
+		colortable[90]=[153, 153, 153];
+		colortable[91]=[81, 81, 81];
+		colortable[92]=[53, 89, 108];
+		colortable[93]=[65, 109, 132];
+		colortable[94]=[76, 127, 153];
+		colortable[95]=[40, 67, 81];
+		colortable[96]=[89, 44, 125];
+		colortable[97]=[109, 54, 153];
+		colortable[98]=[127, 63, 178];
+		colortable[99]=[67, 33, 94];
+		colortable[100]=[36, 53, 125];
+		colortable[101]=[44, 65, 153];
+		colortable[102]=[51, 76, 178];
+		colortable[103]=[27, 40, 94];
+		colortable[104]=[72, 53, 36];
+		colortable[105]=[88, 65, 44];
+		colortable[106]=[102, 76, 51];
+		colortable[107]=[54, 40, 27];
+		colortable[108]=[72, 89, 36];
+		colortable[109]=[88, 109, 44];
+		colortable[110]=[102, 127, 51];
+		colortable[111]=[54, 67, 27];
+		colortable[112]=[108, 36, 36];
+		colortable[113]=[132, 44, 44];
+		colortable[114]=[153, 51, 51];
+		colortable[115]=[81, 27, 27];
+		colortable[116]=[17, 17, 17];
+		colortable[117]=[21, 21, 21];
+		colortable[118]=[25, 25, 25];
+		colortable[119]=[13, 13, 13];
+		colortable[120]=[176, 168, 54];
+		colortable[121]=[215, 205, 66];
+		colortable[122]=[250, 238, 77];
+		colortable[123]=[132, 126, 40];
+		colortable[124]=[64, 154, 150];
+		colortable[125]=[79, 188, 183];
+		colortable[126]=[92, 219, 213];
+		colortable[127]=[48, 115, 112];
+		colortable[128]=[52, 90, 180];
+		colortable[129]=[63, 110, 220];
+		colortable[130]=[74, 128, 255];
+		colortable[131]=[39, 67, 135];
+		colortable[132]=[0, 153, 40];
+		colortable[133]=[0, 187, 50];
+		colortable[134]=[0, 217, 58];
+		colortable[135]=[0, 114, 30];
+		colortable[136]=[91, 60, 34];
+		colortable[137]=[111, 74, 42];
+		colortable[138]=[129, 86, 49];
+		colortable[139]=[68, 45, 25];
+		colortable[140]=[79, 1, 0];
+		colortable[141]=[96, 1, 0];
+		colortable[142]=[112, 2, 0];
+		colortable[143]=[59, 1, 0];
+		colortable[144]=[147, 124, 113];
+		colortable[145]=[180, 152, 138];
+		colortable[146]=[209, 177, 161];
+		colortable[147]=[110, 93, 85];
+		colortable[148]=[112, 57, 25];
+		colortable[149]=[137, 70, 31];
+		colortable[150]=[159, 82, 36];
+		colortable[151]=[84, 43, 19];
+		colortable[152]=[105, 61, 76];
+		colortable[153]=[128, 75, 93];
+		colortable[154]=[149, 87, 108];
+		colortable[155]=[78, 46, 57];
+		colortable[156]=[79, 76, 97];
+		colortable[157]=[96, 93, 119];
+		colortable[158]=[112, 108, 138];
+		colortable[159]=[59, 57, 73];
+		colortable[160]=[131, 93, 25];
+		colortable[161]=[160, 114, 31];
+		colortable[162]=[186, 133, 36];
+		colortable[163]=[98, 70, 19];
+		colortable[164]=[72, 82, 37];
+		colortable[165]=[88, 100, 45];
+		colortable[166]=[103, 117, 53];
+		colortable[167]=[54, 61, 28];
+		colortable[168]=[112, 54, 55];
+		colortable[169]=[138, 66, 67];
+		colortable[170]=[160, 77, 78];
+		colortable[171]=[84, 40, 41];
+		colortable[172]=[40, 28, 24];
+		colortable[173]=[49, 35, 30];
+		colortable[174]=[57, 41, 35];
+		colortable[175]=[30, 21, 18];
+		colortable[176]=[95, 75, 69];
+		colortable[177]=[116, 92, 84];
+		colortable[178]=[135, 107, 98];
+		colortable[179]=[71, 56, 51];
+		colortable[180]=[61, 64, 64];
+		colortable[181]=[75, 79, 79];
+		colortable[182]=[87, 92, 92];
+		colortable[183]=[46, 48, 48];
+		colortable[184]=[86, 51, 62];
+		colortable[185]=[105, 62, 75];
+		colortable[186]=[122, 73, 88];
+		colortable[187]=[64, 38, 46];
+		colortable[188]=[53, 43, 64];
+		colortable[189]=[65, 53, 79];
+		colortable[190]=[76, 62, 92];
+		colortable[191]=[40, 32, 48];
+		colortable[192]=[53, 35, 24];
+		colortable[193]=[65, 43, 30];
+		colortable[194]=[76, 50, 35];
+		colortable[195]=[40, 26, 18];
+		colortable[196]=[53, 57, 29];
+		colortable[197]=[65, 70, 36];
+		colortable[198]=[76, 82, 42];
+		colortable[199]=[40, 43, 22];
+		colortable[200]=[100, 42, 32];
+		colortable[201]=[122, 51, 39];
+		colortable[202]=[142, 60, 46];
+		colortable[203]=[75, 31, 24];
+		colortable[204]=[26, 15, 11];
+		colortable[205]=[31, 18, 13];
+		colortable[206]=[37, 22, 16];
+		colortable[207]=[19, 11, 8];
+		function getnearest(color){
+			if (color[3]!=255){
+				return 0;}
+			var dis=Infinity
+			var ind=-1
+			colortable.forEach((colort,index)=>{
+				var ndis=(colort[0]-color[0])*(colort[0]-color[0])+(colort[1]-color[1])*(colort[1]-color[1])*(colort[2]-color[2])*(colort[2]-color[2])
+				if (ndis<dis){
+					dis=ndis;
+					ind=index
+				}
+			});
+			return ind;
+		}
+		Object.defineProperty(Blob.prototype, 'arrayBuffer', {
+			configurable: true,
+			enumerable: true,
+			writable: true,
+			value: function arrayBuffer() {
+				return new Response(this).arrayBuffer();
+			}
+		});
+		w=1;
+		h=1;
+		px=0;
+		py=0;
+		ix=0;
+		iy=0;
+		uploader=document.getElementById("uploader");
+		downloaddiv=document.getElementById("downloaddiv");
+		canvas=document.getElementById('canvas');
+		ctx = canvas.getContext('2d');
+		ctx.imageSmoothingEnabled = false;
+		function start() {
+			canvas.hidden=false;
+			downloaddiv.innerHTML="";
+
+			[...uploader.files].forEach((file, index) =>{
+				var img=new Image()
+				img.src=URL.createObjectURL(file)
+				img.onload=()=>{
+					ctx.clearRect(0,0,128*w,128*h)
+					ctx.drawImage(img, px,py, ix,iy)
+					for (var j=0;j<h;j++){
+						for (var i=0;i<w;i++){
+							var data=ctx.getImageData(i*128,j*128,128,128).data
+							var listimage=[]
+							for (var k=0;k<16384;k++){
+								listimage.push(getnearest( data.slice(4*k,4*k+4)))
+							}
+							var url = urlgetter(listimage);
+							var element = document.createElement("a");
+							element.className="text-center downloadlink";
+							element.href = url;
+							var sc=+document.getElementById('startcount').value;
+							element.download = "map_"+(sc+index*w*h +i+j*w )+".dat";
+							element.appendChild(document.createTextNode( sc+  index*w*h +i+j*w));
+							downloaddiv.appendChild(element);
+							downloaddiv.appendChild(document.createElement("div"))
+						}
+					}
+				}
+			});
+
+			document.getElementById("start").innerHTML="已完成";
+			document.getElementById('start').disabled=true;
+			document.getElementById('start').className="btn btn-success:disabled"
+			alert("生成成功，如需重新生成请刷新页面");
+		}
+		function view(){
+			canvas.hidden=false;
+			var img=new Image()
+			img.src=URL.createObjectURL(uploader.files[0])
+			img.onload=()=>{
+				document.getElementById("ix").value=ix=img.width
+
+				document.getElementById("iy").value=iy=img.height
+				document.getElementById("w").value=w=Math.ceil(img.width/128)
+				document.getElementById("h").value=h=Math.ceil(img.height/128)
+				canvas.width=w*128
+				canvas.height=h*128
+
+				document.getElementById("mut").hidden=false;
+				document.getElementById('upd').className="btn btn-success"
+				document.getElementById("use").hidden=false;
+
+				//document.getElementById("upd").style.position="";
+				ctx.clearRect(0,0,128*w,128*h)
+				for (var i=0;i<w;i++){
+					ctx.strokeRect(128*i,0,128,128*h)
+				}
+				for (var i=0;i<h;i++){
+					ctx.strokeRect(0,128*i,128*w,128)
+				}
+				ctx.drawImage(img, px, py,ix,iy)
+			}
+		}
+		uploader.onchange=uploader.oninput =view
+
+		function redraw(){
+			canvas.hidden=false;
+			var img=new Image()
+			img.src=URL.createObjectURL(uploader.files[0])
+			img.onload=()=>{
+
+				canvas.width=w*128
+				canvas.height=h*128
+
+				ctx.clearRect(0,0,128*w,128*h)
+				for (var i=0;i<w;i++){
+					ctx.strokeRect(128*i,0,128,128*h)
+				}
+				for (var i=0;i<h;i++){
+					ctx.strokeRect(0,128*i,128*w,128)
+				}
+				ctx.drawImage(img, px, py,ix,iy)
+			}
+		}
+
+		//图片文件 =》下载URL
+		urlgetter=aar=>URL.createObjectURL(new Blob([
+			pako.gzip(
+				new Uint8ClampedArray([10,0,0,...new Uint8ClampedArray(new nbt.Writer().compound(
+					{data:{type:"compound",value:{
+						xCenter: { type: 'int', value: +document.getElementById("mapx").value },
+						zCenter: { type: 'int', value: +document.getElementById("mapz").value },
+						height: { type: 'short', value: 128 },
+						width: { type: 'short', value: 128 },
+						dimension:{ type: 'byte', value: +document.getElementById("mapd").value },
+						colors:{type:"byteArray",value:aar},
+						/*unused:{type:"compound",value:{
+							xCenter: { type: 'int', value: 0 },
+							zCenter: { type: 'int', value: 0 }
+							}
+						}*/
+						}
+					}})
+				)])
+			)
+		]))
+	</script>
+	<!-- Include all compiled plugins (below), or include individual files as needed --> 
+	<script src="./js/popper.min.js"></script> 
+	<script src="./js/bootstrap-4.0.0.js"></script>
+	<script type="text/javascript">
+		function wait(){
+			alert("敬请期待...")
+		}
+	</script>
+</html>

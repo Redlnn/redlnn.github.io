@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="zh-cn">
+<html lang="zh-CN">
 	<head>
 		<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
 		<meta http-equiv="cache-control" content="no-cache">
 		<meta http-equiv="description" content="Red_lnn's Home Page">
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="robots" content="none">
 		<meta name="author" content="Red_lnn, w731347477@gmail.com"/>
@@ -16,7 +17,7 @@
 		<link href="./css/custom.css" rel="stylesheet">
 	</head>
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
-	<script src="./js/jquery-3.4.1.min.js"></script> 
+	<script src="./js/jquery-3.4.1.min.js"></script>
 	<script src="./js/mouse.js"></script>
 	<body>
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -25,7 +26,7 @@
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav mr-auto noselect">
 					<li class="nav-item active"><a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a></li>
-					<li class="nav-item"><a class="nav-link disabled" href="#">Blog</a></li>
+					<li class="nav-item"><a class="nav-link disabled" href="#" onclick="wait()">Blog</a></li>
 					<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Sns </a>
 						<div class="dropdown-menu" aria-labelledby="navbarDropdown" style="animation: fadeIn .8s;">
@@ -37,10 +38,12 @@
 						</div>
 					</li>
 					<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Tools </a>
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Tools </a>
 						<div class="dropdown-menu" aria-labelledby="navbarDropdown" style="animation: fadeIn .8s;">
-							<a class="dropdown-item" href="./qc.html">文本去重</a>
+							<a class="dropdown-item" href="./qc.html">在线文本去重工具</a>
 							<a class="dropdown-item" href="./mcfont.html">Minecraft 字体资源包生成器</a>
+							<a class="dropdown-item" href="./mcmap.html">Minecraft 地图画生成器</a>
+							<a class="dropdown-item" href="./mckuijiajia.html">Minecraft 盔甲架生成器</a>
 							<div class="dropdown-divider"></div>
 							<a class="dropdown-item disabled" href="#">And more...?</a> 
 						</div>
@@ -55,7 +58,7 @@
 			<div class="jumbotron" style="animation: fadeIn 0.5s;">
 				<div class="container" align="center">
 					<div id="search" class="g-ib" style="width:80%">
-							<a href="https://google.com.hk"><img hidefocus="true" src="https://miao.su/images/2019/06/10/Google247fa.gif" width="45%" alt="Google logo, click open Google" class="noselect" style="animation: fadeIn 3.5s; margin-bottom: -10px; margin-top: -28px"></a>
+							<a href="https://google.com.hk"><img hidefocus="true" src="https://wx1.sinaimg.cn/large/7499e7acly1g9fx9f03m2g20oh0b4npe.gif" width="45%" alt="Google logo, click open Google" class="noselect" style="animation: fadeIn 3.5s; margin-bottom: -10px; margin-top: -28px"></a>
 						<form id="search-form" class="search_bar" action="https://www.baidu.com/s" target="_self" style="margin-bottom: -3px">
 							<input type="submit" id="search_submit" value="☯">
 						<span>
@@ -129,4 +132,9 @@
 	<script src="./js/popper.min.js"></script> 
 	<script src="./js/bootstrap-4.0.0.js"></script>
 	<script src="./js/search.js"></script>
+	<script type="text/javascript">
+		function wait(){
+			alert("敬请期待...")
+		}
+	</script>
 </html>

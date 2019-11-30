@@ -8,9 +8,9 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="robots" content="none">
 		<meta name="author" content="Red_lnn, w731347477@gmail.com"/>
-		<meta name="keywords" content="去重,文本在线去重复">
-		<meta name="description" content="本程序在线去除文本重复,js重复,java数组重复,txt重复,是最好用的去重复工具。">
-		<title>在线文本去重工具</title>
+		<meta name="keywords" content="Minecraft,盔甲架,mc,我的世界,生成">
+		<meta name="description" content="本程序可在线生成Minecraft盔甲架指令。">
+		<title>Minecraft 盔甲架生成器</title>
 		<meta property="og:image" content="./favicon.png"/>
 		<link rel="icon" href="./favicon.ico" type="image/x-icon" />
 		<link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
@@ -18,9 +18,25 @@
 		<link href="./css/bootstrap-4.0.0.css" rel="stylesheet">
 		<link href="./css/custom.css" rel="stylesheet">
 	</head>
+	<script type="text/javascript">
+		if (document.documentElement.clientWidth < 992) {
+			alert("本页面不适合窄屏设备使用，即将跳转到主页");
+			window.location.href="./index.html";
+		}
+	</script>
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
 	<script src="./js/jquery-3.4.1.min.js"></script>
 	<script src="./js/mouse.js"></script>
+	<script type="text/javascript">
+		function changeFrameHeight(){
+			var ifm = document.getElementById("mainiframe");
+			ifm.height = document.documentElement.clientHeight-218;
+		}
+		window.onresize = function(){
+				changeFrameHeight();
+		}
+		$(function(){changeFrameHeight();})
+	</script>
 	<body>
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
 			<a class="navbar-brand"><strong>Red_lnn</strong></a>
@@ -45,7 +61,7 @@
 							<a class="dropdown-item active" href="#">在线文本去重工具</a>
 							<a class="dropdown-item" href="./mcfont.html">Minecraft 字体资源包生成器</a>
 							<a class="dropdown-item" href="./mcmap.html">Minecraft 地图画生成器</a>
-							<a class="dropdown-item" href="./mckuijiajia.html">Minecraft 盔甲架生成器</a>
+							<a class="dropdown-item active" href="./mckuijiajia.html">Minecraft 盔甲架生成器</a>
 							<div class="dropdown-divider"></div>
 							<a class="dropdown-item disabled" href="#">And more...?</a> 
 						</div>
@@ -56,72 +72,21 @@
 				</ul>
 			</div>
 		</nav>
-		<header class="jumbotron" align="center">
-			<div class="container" style="animation: fadeIn 2s; margin-top: -28px" align="center">
-				<p>
-					<font size="5">在线文本去重工具</font><font size="3"> (</font><a target="_blank" href="http://wenbenbijiao.renrensousuo.com/"><font color="#0000FF" size="3">文本比较工具</font></a><font size="3">)</font>
-				</p>
-					<div style="width:80%">
-						<div id="mark" class="row" style="animation: fadeIn 2s;">
-							<div class="col-lg-5 col-md-12 col-sm-12 col-xs-12 justify-content-center align-self-center">
-								<textarea name="neirong" id="neirong" class="form-control" type="text" style=" overflow:auto; resize:none;" rows="15%" autocomplete="off">下面是重复内容，可以点击进行测试：
-
-12345678
-
-87654321
-
-
-
-
-
-12345678
-
-
-
-
-
-
-87654321</textarea>
-							</div>
-							<div class="col-lg-2 col-md-12 col-sm-12 col-xs-12 text-center align-self-center">
-								<p></p>
-								<input value=" 去重 -> " id="sx" class="btn btn-primary" onclick="return sx();" type="button" align="center">
-								<p></p>
-							</div>
-							<div class="col-lg-5 col-md-12 col-sm-12 col-xs-12 justify-content-center align-self-center">
-								<textarea readonly name="neirong1" id="neirong1" class="form-control" type="text" style="overflow:auto; resize:none;" rows="15%" autocomplete="off"></textarea>
-							</div>
-						</div>
-					</div>
-				<script type="text/javascript">
-					function sx(){
-						var rntArray=[],temp,hasValue;
-						var array=document.getElementById("neirong").value.split("\n");
-						for(var i in array){
-							temp=array[i];
-							hasValue=false;
-							for(var j in rntArray){
-								if(temp===rntArray[j]){
-									hasValue=true;
-									break;
-								}
-							}
-							if(hasValue===false){
-								rntArray.push(temp);
-							}
-						}
-						document.getElementById("neirong1").value=rntArray.join("\n");
-						document.getElementById('sx').className="btn btn-success"
-					}
-				</script>
+		<iframe width="100%" height="800" id="mainiframe" onload="changeFrameHeight()" src="./Minecraft-ArmorStand-master/index.htm" frameborder="0" scrolling="auto"></iframe>
+		<div class="jumbotron" style="animation: fadeIn 0.5s; margin-top: -7px; padding-top: 17px; padding-bottom: 1px;">
+			<div class="container" style="animation: fadeIn 2s;" align="center">
+				<div class="col-12" style="color: #9e9e9e;">
+					<p>本工具以 GPL 2.0 协议开源
+					<br/><a href="https://github.com/haselkern/Minecraft-ArmorStand">https://github.com/haselkern/Minecraft-ArmorStand</a></p>
+				</div>
 			</div>
-		</header>
-		<footer class="text-center" style="animation: fadeIn 2.5s; margin-top: 20px;">
+		</div>
+		<footer class="text-center" style="animation: fadeIn 2.5s; margin-top: -20px;">
 			<div class="container">
 				<div class="row">
 					<div class="col-12" style="color: #9e9e9e">
 						<p style="margin-bottom: 5px">Copyright © 2018 - 2019 Red_lnn's Homepage</p>
-						<p>Powered by <a href="https://github.com/twbs/bootstrap#copyright-and-license" style="color: #6b6b6b">Bootstrap</a> 4.0.0</p>
+						<p>Powered by <a href="https://github.com/twbs/bootstrap#copyright-and-license" style="color: #6b6b6b" target="_blank">Bootstrap</a> 4.0.0</p>
 					</div>
 				</div>
 			</div>
