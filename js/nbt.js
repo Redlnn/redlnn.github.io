@@ -8,6 +8,8 @@
 	In case this is not legally possible: I grant anyone the right to use this
 	work for any purpose, without any conditions, unless such conditions are
 	required by law.
+	
+	https://github.com/sjmulder/nbt-js/blob/master/nbt.js
 */
 
 (function() {

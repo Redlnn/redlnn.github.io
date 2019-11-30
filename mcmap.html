@@ -17,14 +17,21 @@
 		<!-- Bootstrap -->
 		<link href="./css/bootstrap-4.0.0.css" rel="stylesheet">
 		<link href="./css/custom.css" rel="stylesheet">
+		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
+		<script src="./js/jquery-3.4.1.min.js"></script>
+		<script src="./js/pako_deflate.min.js"></script>
+		<script src="./js/nbt.js"></script>
+		<script src="./js/mouse.js"></script>
+		<script src="./js/jszip.min.js"></script>
+		<script src="./js/FileSaver.min.js"></script>
+		<script type="text/javascript">
+			if (!!window.ActiveXObject || "ActiveXObject" in window){
+				alert("本工具不支持IE浏览器，即将返回上一页");
+				//window.history.go(-1);
+				window.history.back(); 
+			}
+		</script>
 	</head>
-	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
-	<script src="./js/jquery-3.4.1.min.js"></script>
-	<script src="./js/pako_deflate.min.js"></script>
-	<script src="./js/nbt.js"></script>
-	<script src="./js/mouse.js"></script>
-	<script src="./js/jszip.min.js"></script>
-	<script src="./js/FileSaver.min.js"></script>
 	<body>
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
 			<a class="navbar-brand"><strong>Red_lnn</strong></a>
@@ -145,7 +152,7 @@
 								<label class="input-group-text" for="mapd">地图维度</label>
 							</div>
 							<div class="form-control">
-								<input type="number" id="mapd" value="3" style="border:0;width:100%;"/>
+								<input type="number" id="mapd" value="0" style="border:0;width:100%;"/>
 							</div>
 						</div>
 						<div class="input-group mb-3">
@@ -495,7 +502,7 @@
 							}
 							var url = urlgetter(listimage);
 							var element = document.createElement("a");
-							element.className="text-center downloadlink";
+							element.className="downloadlink";
 							element.href = url;
 							var sc=+document.getElementById('startcount').value;
 							element.download = "map_"+(sc+index*w*h +i+j*w )+".dat";
@@ -529,7 +536,6 @@
 				document.getElementById('upd').className="btn btn-success"
 				document.getElementById("use").hidden=false;
 
-				//document.getElementById("upd").style.position="";
 				ctx.clearRect(0,0,128*w,128*h)
 				for (var i=0;i<w;i++){
 					ctx.strokeRect(128*i,0,128,128*h)
@@ -565,24 +571,30 @@
 		//图片文件 =》下载URL
 		urlgetter=aar=>URL.createObjectURL(new Blob([
 			pako.gzip(
-				new Uint8ClampedArray([10,0,0,...new Uint8ClampedArray(new nbt.Writer().compound(
-					{data:{type:"compound",value:{
-						xCenter: { type: 'int', value: +document.getElementById("mapx").value },
-						zCenter: { type: 'int', value: +document.getElementById("mapz").value },
-						height: { type: 'short', value: 128 },
-						width: { type: 'short', value: 128 },
-						dimension:{ type: 'byte', value: +document.getElementById("mapd").value },
-						colors:{type:"byteArray",value:aar},
-						/*unused:{type:"compound",value:{
-							xCenter: { type: 'int', value: 0 },
-							zCenter: { type: 'int', value: 0 }
-							}
-						}*/
+				new Uint8ClampedArray([10,0,0,...new Uint8ClampedArray(new nbt.Writer().compound({
+					data:{
+						type:"compound",value:{
+							banners: { type: 'list', value: { type:"compound",value:{}}},
+							frames: { type: 'list', value: { type:"compound",value:{}}},
+							xCenter: { type: 'int', value: +document.getElementById("mapx").value },
+							zCenter: { type: 'int', value: +document.getElementById("mapz").value },
+							dimension:{ type: 'int', value: +document.getElementById("mapd").value },
+							colors:{type:"byteArray",value:aar},
+							locked: { type: 'byte', value: 1},
+							scale: { type: 'byte', value: 0},
+							trackingPosition: { type: 'byte', value: 1},
+							unlimitedTracking: { type: 'byte', value: 0},
+							/* 1.14更新失效
+							height: { type: 'short', value: 128 },
+							width: { type: 'short', value: 128 },
+							dimension:{ type: 'byte', value: +document.getElementById("mapd").value },
+							*/
 						}
-					}})
-				)])
-			)
-		]))
+					},
+					DataVersion: { type: 'int', value: 1976},
+					}).getData()
+				)]))
+			]))
 	</script>
 	<!-- Include all compiled plugins (below), or include individual files as needed --> 
 	<script src="./js/popper.min.js"></script> 
