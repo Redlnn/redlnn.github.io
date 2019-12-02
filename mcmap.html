@@ -174,7 +174,7 @@
 								</select>
 							</div>
 						<button class="btn btn-primary" id="start" onclick="start()">Start</button>
-						<button class="btn btn-primary" onclick="[...document.getElementsByClassName(&quot;downloadlink&quot;)].forEach((e,i)=>{setTimeout(()=>{e.click()},30*i)})">全部下载</button>
+						<button class="btn btn-primary" id="downloadall" onclick="[...document.getElementsByClassName(&quot;downloadlink&quot;)].forEach((e,i)=>{setTimeout(()=>{e.click()},30*i)});document.getElementById('downloadall').className=&quot;btn btn-success&quot;">全部下载</button>
 						<div>
 							<br>
 						</div>
